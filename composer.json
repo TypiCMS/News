@@ -15,7 +15,7 @@
             "migrations"
         ],
         "psr-4": {
-            "TypiCMS\\Modules\\News\\": ""
+            "TypiCMS\\Modules\\News\\": "src/"
         }
     },
     "minimum-stability": "stable"
