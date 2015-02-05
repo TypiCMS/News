@@ -35,7 +35,7 @@ class PublicController extends BasePublicController
 
         $models = Paginator::make($data->items, $data->totalItems, $itemsPerPage);
 
-        $this->layout->content = View::make('news.public.index')->withModels($models);
+        return view('news.public.index')->withModels($models);
     }
 
     /**
@@ -51,7 +51,7 @@ class PublicController extends BasePublicController
 
         $this->title['parent'] = $model->title;
 
-        $this->layout->content = View::make('news.public.show')
+        return view('news.public.show')
             ->withModel($model);
     }
 }
