@@ -1,30 +1,21 @@
 <?php
 namespace TypiCMS\Modules\News\Providers;
 
-use Lang;
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Models
+use Illuminate\Support\ServiceProvider;
+use Lang;
 use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Models\NewsTranslation;
-
-// Repo
-use TypiCMS\Modules\News\Repositories\EloquentNews;
-
-// Cache
 use TypiCMS\Modules\News\Repositories\CacheDecorator;
-use TypiCMS\Services\Cache\LaravelCache;
-
-// Form
+use TypiCMS\Modules\News\Repositories\EloquentNews;
 use TypiCMS\Modules\News\Services\Form\NewsForm;
 use TypiCMS\Modules\News\Services\Form\NewsFormLaravelValidator;
-
-// Observers
-use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Observers\FileObserver;
+use TypiCMS\Observers\SlugObserver;
+use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -35,9 +26,19 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
-        Lang::addNamespace('news', __DIR__ . '/../lang');
-        Config::addNamespace('news', __DIR__ . '/../config');
+        View::addNamespace('news', __DIR__ . '/../views/');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'news');
+        $this->publishes([
+            __DIR__ . '/../config/' => config_path('typicms/news'),
+        ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'News',
+            'TypiCMS\Modules\News\Facades\Facade'
+        );
 
         // Observers
         NewsTranslation::observe(new SlugObserver);
@@ -69,10 +70,6 @@ class ModuleProvider extends ServiceProvider
                 new NewsFormLaravelValidator($app['validator']),
                 $app->make('TypiCMS\Modules\News\Repositories\NewsInterface')
             );
-        });
-
-        $app->before(function ($request, $response) {
-            require __DIR__ . '/../breadcrumbs.php';
         });
 
     }
