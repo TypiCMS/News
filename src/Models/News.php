@@ -16,7 +16,7 @@ class News extends Base
 
     protected $presenter = 'TypiCMS\Modules\News\Presenters\ModulePresenter';
 
-    protected $dates = array('date');
+    protected $dates = ['date'];
 
     protected $fillable = array(
         'date',
