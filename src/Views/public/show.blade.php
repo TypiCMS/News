@@ -7,9 +7,9 @@
             <time datetime="{{ $model->date }}" pubdate>{{ $model->present()->dateLocalized }}</time>
         </div>
         <p class="summary">{{ nl2br($model->summary) }}</p>
-        <div class="body">{{ $model->body }}</div>
+        <div class="body">{!! $model->body !!}</div>
     </article>
 
-    @include('galleries.public._galleries')
+    @include('galleries::public._galleries')
 
 @stop
