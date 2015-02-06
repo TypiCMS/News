@@ -29,15 +29,8 @@
     <div class="tab-pane fade in active" id="tab-main">
 
         <div class="row">
-            <div class="col-sm-6 form-group @if($errors->has('date'))has-error @endif">
-                {{ Form::label('date', trans('validation.attributes.date'), array('class' => 'control-label')) }}
-                {{ Form::text('date', $model->present()->dateOrNow(), array('class' => 'datepicker form-control', 'data-value' => $model->present()->dateOrNow(), 'placeholder' => trans('validation.attributes.DDMMYYYY'))) }}
-                {{ $errors->first('date', '<p class="help-block">:message</p>') }}
-            </div>
-            <div class="col-sm-3 form-group @if($errors->has('time'))has-error @endif">
-                {{ Form::label('time', trans('validation.attributes.time'), array('class' => 'control-label')) }}
-                {{ Form::text('time', $model->present()->timeOrNow(), array('class' => 'form-control', 'placeholder' => trans('validation.attributes.HH:MM'))) }}
-                {{ $errors->first('time', '<p class="help-block">:message</p>') }}
+            <div class="col-sm-6">
+                {!! BootForm::date(trans('validation.attributes.date'), 'date') !!}
             </div>
         </div>
 
@@ -51,25 +44,22 @@
             <div class="tab-pane fade @if($locale == $lang)in active @endif" id="content-{{ $lang }}">
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        {!! BootForm::text(trans('labels.title'), $lang.'[title]') !!}
+                        {!! BootForm::text(trans('validation.attributes.title'), $lang.'[title]') !!}
                     </div>
                     <div class="col-md-6 form-group @if($errors->has($lang.'.slug'))has-error @endif">
-                        {{ Form::label($lang.'[slug]', trans('validation.attributes.slug'), array('class' => 'control-label')) }}
+                        <label class="control-label" for="{{ $lang }}[slug]">@lang('validation.attributes.slug')</label>
                         <div class="input-group">
-                            {{ Form::text($lang.'[slug]', $model->translate($lang)->slug, array('class' => 'form-control')) }}
+                            <input class="form-control" type="text" name="{{ $lang }}[slug]" id="{{ $lang }}[slug]" value="@if($model->hasTranslation($lang)){{ $model->translate($lang)->slug }}@endif">
                             <span class="input-group-btn">
                                 <button class="btn btn-default btn-slug @if($errors->has($lang.'.slug'))btn-danger @endif" type="button">@lang('validation.attributes.generate')</button>
                             </span>
                         </div>
-                        {{ $errors->first($lang.'.slug', '<p class="help-block">:message</p>') }}
+                        {!! $errors->first($lang.'.slug', '<p class="help-block">:message</p>') !!}
                     </div>
                 </div>
-                {!! BootForm::checkbox(trans('labels.online'), $lang.'[status]') !!}
-                <div class="form-group">
-                    {{ Form::label($lang.'[summary]', trans('validation.attributes.summary')) }}
-                    {{ Form::textarea($lang.'[summary]', $model->translate($lang)->summary, array('class' => 'form-control', 'rows' => 4)) }}
-                </div>
-                {!! BootForm::textarea(trans('labels.body'), $lang.'[body]')->addClass('editor') !!}
+                {!! BootForm::checkbox(trans('validation.attributes.online'), $lang.'[status]') !!}
+                {!! BootForm::textarea(trans('validation.attributes.summary'), $lang.'[summary]') !!}
+                {!! BootForm::textarea(trans('validation.attributes.body'), $lang.'[body]')->addClass('editor') !!}
             </div>
 
         @endforeach
