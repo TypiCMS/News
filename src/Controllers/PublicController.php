@@ -1,14 +1,13 @@
 <?php
 namespace TypiCMS\Modules\News\Controllers;
 
+use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Str;
-use View;
 use Input;
-use Config;
-use Paginator;
 use TypiCMS;
-use TypiCMS\Modules\News\Repositories\NewsInterface;
 use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Modules\News\Repositories\NewsInterface;
+use View;
 
 class PublicController extends BasePublicController
 {
@@ -29,11 +28,11 @@ class PublicController extends BasePublicController
         TypiCMS::setModel($this->repository->getModel());
 
         $page = Input::get('page');
-        $itemsPerPage = Config::get('news::public.itemsPerPage');
+        $perPage = config('typicms.news.per_page');
 
-        $data = $this->repository->byPage($page, $itemsPerPage, array('translations'));
+        $data = $this->repository->byPage($page, $perPage, ['translations']);
 
-        $models = Paginator::make($data->items, $data->totalItems, $itemsPerPage);
+        $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
 
         return view('news::public.index')
             ->with(compact('models'));

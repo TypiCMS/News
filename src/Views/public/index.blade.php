@@ -1,6 +1,8 @@
+@extends('core::public.master')
+
 @section('main')
 
-    <h2>{{ Str::title(trans_choice('news::global.news', $models->getTotal())) }}</h2>
+    <h2>{{ Illuminate\Support\Str::title(trans_choice('news::global.news', $models->total())) }}</h2>
 
     @if ($models->count())
     <ul>
@@ -16,6 +18,6 @@
     </ul>
     @endif
 
-    {{ $models->appends(Input::except('page'))->links() }}
+    {!! $models->appends(Input::except('page'))->render() !!}
 
 @stop
