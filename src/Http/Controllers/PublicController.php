@@ -1,5 +1,5 @@
 <?php
-namespace TypiCMS\Modules\News\Controllers;
+namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Str;

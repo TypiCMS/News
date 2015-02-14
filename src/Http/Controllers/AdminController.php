@@ -1,5 +1,5 @@
 <?php
-namespace TypiCMS\Modules\News\Controllers;
+namespace TypiCMS\Modules\News\Http\Controllers;
 
 use TypiCMS\Controllers\AdminSimpleController;
 use TypiCMS\Modules\News\Repositories\NewsInterface;

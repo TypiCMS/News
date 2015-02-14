@@ -9,7 +9,7 @@ if (! App::runningInConsole()) {
     Route::group(
         array(
             'before'    => 'visitor.publicAccess',
-            'namespace' => 'TypiCMS\Modules\News\Controllers',
+            'namespace' => 'TypiCMS\Modules\News\Http\Controllers',
         ),
         function () {
             $routes = app('TypiCMS.routes');
@@ -31,7 +31,7 @@ if (! App::runningInConsole()) {
 
 Route::group(
     array(
-        'namespace' => 'TypiCMS\Modules\News\Controllers',
+        'namespace' => 'TypiCMS\Modules\News\Http\Controllers',
         'prefix'    => 'admin',
     ),
     function () {
@@ -42,6 +42,6 @@ Route::group(
 Route::group(array('prefix'=>'api'), function() {
     Route::resource(
         'news',
-        'TypiCMS\Modules\News\Controllers\ApiController'
+        'TypiCMS\Modules\News\Http\Controllers\ApiController'
     );
 });
