@@ -5,7 +5,7 @@ use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Str;
 use Input;
 use TypiCMS;
-use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\News\Repositories\NewsInterface;
 use View;
 
