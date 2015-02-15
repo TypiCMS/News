@@ -10,8 +10,6 @@ use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Models\NewsTranslation;
 use TypiCMS\Modules\News\Repositories\CacheDecorator;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
-use TypiCMS\Modules\News\Services\Form\NewsForm;
-use TypiCMS\Modules\News\Services\Form\NewsFormLaravelValidator;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Services\Cache\LaravelCache;
@@ -65,13 +63,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        $app->bind('TypiCMS\Modules\News\Services\Form\NewsForm', function (Application $app) {
-            return new NewsForm(
-                new NewsFormLaravelValidator($app['validator']),
-                $app->make('TypiCMS\Modules\News\Repositories\NewsInterface')
-            );
         });
 
     }

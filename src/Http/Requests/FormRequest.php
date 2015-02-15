@@ -12,7 +12,13 @@ class FormRequest extends AbstractFormRequest {
             'time' => 'date_format:G:i',
         ];
         foreach (config('translatable.locales') as $locale) {
-            $rules[$locale . '.slug'] = "required_with:$locale.title|required_if:$locale.status,1|alpha_dash";
+            $rules[$locale . '.slug'] = [
+                'required_with:' . $locale . '.title',
+                'required_if:' . $locale . '.status,1',
+                'alpha_dash',
+                'max:255',
+            ];
+            $rules[$locale . '.title'] = 'max:255';
         }
         return $rules;
     }
