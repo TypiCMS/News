@@ -50,4 +50,17 @@ class News extends Base
     public $attachments = array(
         'image',
     );
+
+    /**
+     * A news has many galleries.
+     *
+     * @return MorphToMany
+     */
+    public function galleries()
+    {
+        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
+            ->withPivot('position')
+            ->orderBy('position')
+            ->withTimestamps();
+    }
 }
