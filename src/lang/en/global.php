@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'news',
+    'name' => 'News',
     'news' => 'news|news',
     'New'  => 'New news',
     'Edit' => 'Edit news',

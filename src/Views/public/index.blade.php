@@ -1,8 +1,11 @@
 @extends('core::public.master')
 
+@section('title', trans('news::global.name') . ' – ' . $websiteTitle)
+@section('ogTitle', trans('news::global.name'))
+
 @section('main')
 
-    <h2>{{ Illuminate\Support\Str::title(trans_choice('news::global.news', $models->total())) }}</h2>
+    <h2>@lang('news::global.name')</h2>
 
     @if ($models->count())
     <ul>

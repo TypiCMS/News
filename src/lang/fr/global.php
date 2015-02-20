@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'actualités',
+    'name' => 'Actualités',
     'news' => 'actualité|actualités',
     'New'  => 'Nouvelle actualité',
     'Edit' => 'Modifier l’actualité',
