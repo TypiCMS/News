@@ -1,11 +1,11 @@
 <?php
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Repositories\NewsInterface;
 
-class AdminController extends AdminSimpleController
+class AdminController extends BaseAdminController
 {
 
     public function __construct(NewsInterface $news)
