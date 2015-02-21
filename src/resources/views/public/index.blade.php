@@ -2,6 +2,7 @@
 
 @section('title', trans('news::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', trans('news::global.name'))
+@section('bodyClass', 'body-news-index')
 
 @section('main')
 
