@@ -49,8 +49,6 @@ class PublicController extends BasePublicController
 
         TypiCMS::setModel($model);
 
-        $this->title['parent'] = $model->title;
-
         return view('news::public.show')
             ->with(compact('model'));
     }
