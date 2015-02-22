@@ -3,15 +3,11 @@ use TypiCMS\Modules\News\Models\News;
 
 class NewsControllerTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
 
     public function testAdminIndex()
     {
-        $this->get('admin/news');
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $response = $this->call('GET', 'admin/news');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreFails()
