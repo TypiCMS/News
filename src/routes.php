@@ -8,7 +8,7 @@ Route::bind('news', function ($value) {
 if (! App::runningInConsole()) {
     Route::group(
         array(
-            'before'    => 'visitor.publicAccess',
+            'before'    => 'visitorHasPublicAccess',
             'namespace' => 'TypiCMS\Modules\News\Http\Controllers',
         ),
         function () {
