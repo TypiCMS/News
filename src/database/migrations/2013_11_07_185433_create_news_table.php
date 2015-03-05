@@ -30,7 +30,7 @@ class CreateNewsTable extends Migration
 
             $table->string('locale')->index();
 
-            $table->tinyInteger('status')->default(0);
+            $table->boolean('status')->default(0);
 
             $table->string('title');
             $table->string('slug')->nullable();
