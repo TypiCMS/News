@@ -42,6 +42,8 @@ class News extends Base
         'body',
     );
 
+    protected $appends = ['status', 'title', 'thumb'];
+
     /**
      * Columns that are file.
      *
