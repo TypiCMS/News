@@ -30,7 +30,7 @@
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::date(trans('validation.attributes.date'), 'date')->value($model->present()->dateOrNow('date'))->placeholder(trans('validation.attributes.DDMMYYYY'))->addClass('datepicker') !!}
+                {!! BootForm::date(trans('validation.attributes.date'), 'date')->value($model->present()->dateOrNow('date'))->placeholder(trans('validation.attributes.DDMMYYYY')) !!}
             </div>
         </div>
 

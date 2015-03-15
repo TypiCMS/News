@@ -16,7 +16,7 @@ class CreateNewsTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->timestamp('date');
+            $table->date('date');
             $table->string('image')->nullable();
 
             $table->timestamps();

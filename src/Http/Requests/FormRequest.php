@@ -9,7 +9,6 @@ class FormRequest extends AbstractFormRequest {
     {
         $rules = [
             'date'  => 'required|date',
-            'time'  => 'date_format:G:i',
             'image' => 'image|max:2000|image_size:>=500',
         ];
         foreach (config('translatable.locales') as $locale) {
