@@ -65,7 +65,7 @@ class ModuleProvider extends ServiceProvider
 
         $app->bind('TypiCMS\Modules\News\Repositories\NewsInterface', function (Application $app) {
             $repository = new EloquentNews(new News);
-            if (! Config::get('app.cache')) {
+            if (! config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
