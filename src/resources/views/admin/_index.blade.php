@@ -37,7 +37,7 @@
                     <td>
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
-                    <td>@{{ model.date | dateFromMySQL:'short' }}</td>
+                    <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
                     <td>@{{ model.title }}</td>
                 </tr>
             </tbody>
