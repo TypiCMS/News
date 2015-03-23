@@ -8,6 +8,7 @@
 
 @section('main')
 
+    @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
     <article>
         <h2>{{ $model->title }}</h2>
         <div class="date">@lang('news::global.Published on') 
