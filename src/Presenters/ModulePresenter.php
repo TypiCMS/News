@@ -8,6 +8,6 @@ class ModulePresenter extends Presenter
 
     public function dateLocalized()
     {
-        return $this->entity->date->formatLocalized('%d %B %Y %H:%M');
+        return $this->entity->date->formatLocalized('%d %B %Y');
     }
 }
