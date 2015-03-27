@@ -10,7 +10,8 @@
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
     <article>
-        <h2>{{ $model->title }}</h2>
+        <h1>{{ $model->title }}</h1>
+        {!! $model->present()->thumb(null, 200) !!}
         <div class="date">@lang('news::global.Published on') 
             <time datetime="{{ $model->date }}" pubdate>{{ $model->present()->dateLocalized }}</time>
         </div>
