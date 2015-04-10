@@ -42,18 +42,13 @@ class RouteServiceProvider extends ServiceProvider {
             /**
              * Front office routes
              */
-            $routes = app('TypiCMS.routes');
+            $routes = $this->app->make('TypiCMS.routes');
             foreach (Config::get('translatable.locales') as $lang) {
                 if (isset($routes['news'][$lang])) {
                     $uri = $routes['news'][$lang];
-                } else {
-                    $uri = 'news';
-                    if (Config::get('app.fallback_locale') != $lang || config('typicms.main_locale_in_url')) {
-                        $uri = $lang . '/' . $uri;
-                    }
+                    $router->get($uri, array('as' => $lang.'.news', 'uses' => 'PublicController@index'));
+                    $router->get($uri.'/{slug}', array('as' => $lang.'.news.slug', 'uses' => 'PublicController@show'));
                 }
-                $router->get($uri, array('as' => $lang.'.news', 'uses' => 'PublicController@index'));
-                $router->get($uri.'/{slug}', array('as' => $lang.'.news.slug', 'uses' => 'PublicController@show'));
             }
 
             /**
