@@ -15,7 +15,6 @@ class PublicController extends BasePublicController
     public function __construct(NewsInterface $news)
     {
         parent::__construct($news);
-        $this->title['parent'] = Str::title(trans_choice('news::global.news', 2));
     }
 
     /**
