@@ -25,6 +25,9 @@ class ModuleProvider extends ServiceProvider
             __DIR__ . '/../config/config.php', 'typicms.news'
         );
 
+        $modules = $this->app['config']['typicms']['modules'];
+        $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page']], $modules));
+
         $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'news');
         $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'news');
 
