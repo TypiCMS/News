@@ -1,12 +1,13 @@
-@extends('core::public.master')
+@extends('pages::public.master')
+<?php $page = TypiCMS::getPageLinkedToModule('news') ?>
 
-@section('title', trans('news::global.name') . ' – ' . $websiteTitle)
-@section('ogTitle', trans('news::global.name'))
-@section('bodyClass', 'body-news-index')
+@section('bodyClass', 'body-news body-news-index body-page body-page-' . $page->id)
 
 @section('main')
 
-    <h1>@lang('news::global.name')</h1>
+    {!! $page->body !!}
+
+    @include('galleries::public._galleries', ['model' => $page])
 
     @if ($models->count())
     @include('news::public._list', ['items' => $models])
