@@ -1,10 +1,11 @@
 @extends('core::public.master')
+<?php $page = TypiCMS::getPageLinkedToModule('news') ?>
 
 @section('title', $model->title . ' – ' . trans('news::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbAbsoluteSrc())
-@section('bodyClass', 'body-news body-news-' . $model->id)
+@section('bodyClass', 'body-news body-news-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('main')
 
@@ -12,7 +13,7 @@
     <article>
         <h1>{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
-        <div class="date">@lang('news::global.Published on') 
+        <div class="date">@lang('news::global.Published on')
             <time datetime="{{ $model->date }}" pubdate>{{ $model->present()->dateLocalized }}</time>
         </div>
         <p class="summary">{{ nl2br($model->summary) }}</p>
