@@ -47,7 +47,7 @@ class RouteServiceProvider extends ServiceProvider {
                     $options = $page->private ? ['middleware' => 'auth'] : [] ;
                     if ($uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['as' => $lang.'.news', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{slug}', $options + $options + ['as' => $lang.'.news.slug', 'uses' => 'PublicController@show']);
+                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.news.slug', 'uses' => 'PublicController@show']);
                     }
                 }
             }
