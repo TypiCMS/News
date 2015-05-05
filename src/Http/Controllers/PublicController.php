@@ -2,9 +2,7 @@
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
-use Illuminate\Support\Str;
 use Input;
-use TypiCMS;
 use TypiCMS\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\News\Repositories\NewsInterface;
 use View;
