@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\News\Models;
 
-use TypiCMS\Models\BaseTranslation;
+use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class NewsTranslation extends BaseTranslation
 {

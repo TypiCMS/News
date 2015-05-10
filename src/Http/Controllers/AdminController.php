@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use TypiCMS\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Repositories\NewsInterface;
 
