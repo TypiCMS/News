@@ -1,6 +1,7 @@
 {
     "name": "typicms/news",
     "description": "",
+    "license": "MIT",
     "authors": [
         {
             "name": "Samuel De Backer",
