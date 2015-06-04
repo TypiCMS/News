@@ -17,7 +17,7 @@ class PublicController extends BasePublicController
     /**
      * Display a listing of the resource.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function index()
     {
@@ -33,7 +33,7 @@ class PublicController extends BasePublicController
     /**
      * Show news.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function show($slug)
     {
