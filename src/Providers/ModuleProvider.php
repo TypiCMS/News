@@ -4,13 +4,14 @@ namespace TypiCMS\Modules\News\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Models\NewsTranslation;
 use TypiCMS\Modules\News\Repositories\CacheDecorator;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
-use TypiCMS\Modules\Core\Observers\FileObserver;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -68,6 +69,13 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
+        });
+
+        /**
+         * Return the page linked to this module (for @inject in views)
+         */
+        $app->singleton('typicms.news.page', function (Application $app) {
+            return TypiCMS::getPageLinkedToModule('news');
         });
 
     }
