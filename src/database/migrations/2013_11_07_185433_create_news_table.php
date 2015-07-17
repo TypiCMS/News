@@ -25,7 +25,7 @@ class CreateNewsTable extends Migration
         Schema::create('news_translations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('news_id')->unsigned();
 
             $table->string('locale')->index();
