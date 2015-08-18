@@ -1,41 +1,45 @@
 <?php
-use TypiCMS\Modules\News\Models\News;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\WithoutMiddleware;
 
 class NewsControllerTest extends TestCase
 {
 
-    public function testAdminIndex()
+    public function testNewsListAndClickOnButtonNew()
     {
-        $response = $this->call('GET', 'admin/news');
-        $this->assertEquals(200, $response->getStatusCode());
+        $this->actingAs($this->user)
+             ->visit('admin/news')
+             ->see('admin/news/create')
+             ->click('New')
+             ->seePageIs('admin/news/create');
+    }
+
+    public function testViewCreatePage()
+    {
+        $this->actingAs($this->user)
+             ->visit('admin/news/create')
+             ->see('New news');
     }
 
     public function testStoreFails()
     {
-        $input = ['date' => ''];
-        $this->call('POST', 'admin/news', $input);
-        $this->assertRedirectedToRoute('admin.news.create');
-        $this->assertSessionHasErrors(['date']);
+        $this->actingAs($this->user)
+             ->visit('admin/news/create')
+             ->type('', 'date')
+             ->press('Save')
+             ->seePageIs('admin/news/create')
+             ->see('alert alert-danger alert-dismissable');
     }
 
     public function testStoreSuccess()
     {
-        $object = new News;
-        $object->id = 1;
-        News::shouldReceive('create')->once()->andReturn($object);
-        $input = array('date' => '2014-03-10 11:04:00');
-        $this->call('POST', 'admin/news', $input);
-        $this->assertRedirectedToRoute('admin.news.edit', array('id' => 1));
+        $this->actingAs($this->user)
+             ->visit('admin/news/create')
+             ->type('2015-09-09', 'date')
+             // ->type(0, 'exit')
+             ->press('Save')
+             ->seeInDatabase('news', ['date' => '2015-09-09'])
+             ->seePageIs('admin/news');
     }
-
-    public function testStoreSuccessWithRedirectToList()
-    {
-        $object = new News;
-        $object->id = 1;
-        News::shouldReceive('create')->once()->andReturn($object);
-        $input = array('date' => '2014-03-10 11:04:00', 'exit' => true);
-        $this->call('POST', 'admin/news', $input);
-        $this->assertRedirectedToRoute('admin.news.index');
-    }
-
 }
