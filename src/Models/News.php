@@ -18,7 +18,7 @@ class News extends Base
 
     protected $dates = ['date'];
 
-    protected $dateFormat = 'Y-m-d';
+    // protected $dateFormat = 'Y-m-d';
 
     protected $fillable = array(
         'date',
