@@ -4,7 +4,7 @@
         <div class="list-news-info">
             <div class="title">{{ $news->title }}</div>
             <div class="summary">{{ $news->summary }}</div>
-            <div class="date">{{ $news->present()->dateLocalized }}</div>
+            <time class="date" datetime="{{ $news->date }}">{{ $news->present()->dateLocalized }}</time>
         </div>
     </a>
 </li>

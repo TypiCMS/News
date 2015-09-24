@@ -14,7 +14,7 @@
         <h1>{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
         <div class="date">@lang('news::global.Published on')
-            <time datetime="{{ $model->date }}" pubdate>{{ $model->present()->dateLocalized }}</time>
+            <time datetime="{{ $model->date }}">{{ $model->present()->dateLocalized }}</time>
         </div>
         <p class="summary">{{ nl2br($model->summary) }}</p>
         <div class="body">{!! $model->present()->body !!}</div>
