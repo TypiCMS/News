@@ -61,6 +61,13 @@ class ModuleProvider extends ServiceProvider
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\News\Composers\SidebarViewComposer');
 
+        /**
+         * Add the page in the view.
+         */
+        $app->view->composer('news::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('news');
+        });
+
         $app->bind('TypiCMS\Modules\News\Repositories\NewsInterface', function (Application $app) {
             $repository = new EloquentNews(new News);
             if (! config('typicms.cache')) {
@@ -69,13 +76,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        /**
-         * Return the page linked to this module (for @inject in views)
-         */
-        $app->singleton('typicms.news.page', function (Application $app) {
-            return TypiCMS::getPageLinkedToModule('news');
         });
 
     }
