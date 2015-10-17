@@ -1,7 +1,7 @@
 <?php
+
 namespace TypiCMS\Modules\News\Models;
 
-use Carbon\Carbon;
 use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Modules\Core\Models\Base;
@@ -9,7 +9,6 @@ use TypiCMS\Modules\History\Traits\Historable;
 
 class News extends Base
 {
-
     use Historable;
     use Translatable;
     use PresentableTrait;
@@ -20,7 +19,7 @@ class News extends Base
 
     // protected $dateFormat = 'Y-m-d';
 
-    protected $fillable = array(
+    protected $fillable = [
         'date',
         'image',
         // Translatable columns
@@ -29,20 +28,20 @@ class News extends Base
         'status',
         'summary',
         'body',
-    );
+    ];
 
     /**
      * Translatable model configs.
      *
      * @var array
      */
-    public $translatedAttributes = array(
+    public $translatedAttributes = [
         'title',
         'slug',
         'status',
         'summary',
         'body',
-    );
+    ];
 
     protected $appends = ['status', 'title', 'thumb'];
 
@@ -51,9 +50,9 @@ class News extends Base
      *
      * @var array
      */
-    public $attachments = array(
+    public $attachments = [
         'image',
-    );
+    ];
 
     /**
      * A news has many galleries.
