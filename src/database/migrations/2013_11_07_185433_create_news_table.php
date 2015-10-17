@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateNewsTable extends Migration
 {
@@ -40,7 +40,7 @@ class CreateNewsTable extends Migration
 
             $table->timestamps();
 
-            $table->unique(array('news_id', 'locale'));
+            $table->unique(['news_id', 'locale']);
             $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
 
         });
@@ -56,5 +56,4 @@ class CreateNewsTable extends Migration
         Schema::drop('news_translations');
         Schema::drop('news');
     }
-
 }

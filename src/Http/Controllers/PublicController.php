@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Pagination\LengthAwarePaginator as Paginator;
@@ -8,7 +9,6 @@ use TypiCMS\Modules\News\Repositories\NewsInterface;
 
 class PublicController extends BasePublicController
 {
-
     public function __construct(NewsInterface $news)
     {
         parent::__construct($news);
@@ -38,6 +38,7 @@ class PublicController extends BasePublicController
     public function show($slug)
     {
         $model = $this->repository->bySlug($slug);
+
         return view('news::public.show')
             ->with(compact('model'));
     }

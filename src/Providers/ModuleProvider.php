@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\News\Providers;
 
 use Illuminate\Foundation\AliasLoader;
@@ -15,25 +16,23 @@ use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class ModuleProvider extends ServiceProvider
 {
-
     public function boot()
     {
-
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php', 'typicms.news'
+            __DIR__.'/../config/config.php', 'typicms.news'
         );
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'news');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'news');
+        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'news');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'news');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/news'),
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/news'),
         ], 'views');
         $this->publishes([
-            __DIR__ . '/../database' => base_path('database'),
+            __DIR__.'/../database' => base_path('database'),
         ], 'migrations');
 
         AliasLoader::getInstance()->alias(
@@ -42,26 +41,25 @@ class ModuleProvider extends ServiceProvider
         );
 
         // Observers
-        NewsTranslation::observe(new SlugObserver);
-        News::observe(new FileObserver);
+        NewsTranslation::observe(new SlugObserver());
+        News::observe(new FileObserver());
     }
 
     public function register()
     {
-
         $app = $this->app;
 
-        /**
+        /*
          * Register route service provider
          */
         $app->register('TypiCMS\Modules\News\Providers\RouteServiceProvider');
 
-        /**
+        /*
          * Sidebar view composer
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\News\Composers\SidebarViewComposer');
 
-        /**
+        /*
          * Add the page in the view.
          */
         $app->view->composer('news::public.*', function ($view) {
@@ -69,14 +67,13 @@ class ModuleProvider extends ServiceProvider
         });
 
         $app->bind('TypiCMS\Modules\News\Repositories\NewsInterface', function (Application $app) {
-            $repository = new EloquentNews(new News);
-            if (! config('typicms.cache')) {
+            $repository = new EloquentNews(new News());
+            if (!config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
         });
-
     }
 }

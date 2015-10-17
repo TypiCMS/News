@@ -1,11 +1,8 @@
 <?php
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
+
 
 class NewsControllerTest extends TestCase
 {
-
     public function testNewsListAndClickOnButtonNew()
     {
         $this->actingAs($this->user)
