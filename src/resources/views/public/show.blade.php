@@ -9,14 +9,16 @@
 @section('main')
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
-    <article>
-        <h1>{{ $model->title }}</h1>
+
+    <article class="news" itemscope itemtype="http://schema.org/Article">
+        <h1 class="news-title" itemprop="name">{{ $model->title }}</h1>
         {!! $model->present()->thumb(null, 200) !!}
-        <div class="date">@lang('news::global.Published on')
-            <time datetime="{{ $model->date }}">{{ $model->present()->dateLocalized }}</time>
+        <meta itemprop="image" content="{{ $news->present()->thumbUrl() }}">
+        <div class="news-date-wrapper" class="date">@lang('news::global.Published on')
+            <time class="news-date" itemprop="datePublished" datetime="{{ $model->date->toIso8601String() }}">{{ $model->present()->dateLocalized }}</time>
         </div>
-        <p class="summary">{{ nl2br($model->summary) }}</p>
-        <div class="body">{!! $model->present()->body !!}</div>
+        <p class="news-summary" itemprop="headline">{{ nl2br($model->summary) }}</p>
+        <div class="news-body" itemprop="articleBody">{!! $model->present()->body !!}</div>
     </article>
 
     @include('galleries::public._galleries')
