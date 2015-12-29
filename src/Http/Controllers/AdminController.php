@@ -17,7 +17,7 @@ class AdminController extends BaseAdminController
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \TypiCMS\Modules\News\Models\News $news
+     * @param \TypiCMS\Modules\News\Models\News $news
      *
      * @return \Illuminate\View\View
      */
@@ -30,7 +30,7 @@ class AdminController extends BaseAdminController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \TypiCMS\Modules\News\Http\Requests\FormRequest $request
+     * @param \TypiCMS\Modules\News\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -44,8 +44,8 @@ class AdminController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param  \TypiCMS\Modules\News\Models\News               $news
-     * @param  \TypiCMS\Modules\News\Http\Requests\FormRequest $request
+     * @param \TypiCMS\Modules\News\Models\News               $news
+     * @param \TypiCMS\Modules\News\Http\Requests\FormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
      */
