@@ -15,7 +15,20 @@ class AdminController extends BaseAdminController
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Create form for a new resource.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function create()
+    {
+        $model = $this->repository->getModel();
+
+        return view('core::admin.create')
+            ->with(compact('model'));
+    }
+
+    /**
+     * Edit form for the specified resource.
      *
      * @param \TypiCMS\Modules\News\Models\News $news
      *
@@ -54,5 +67,19 @@ class AdminController extends BaseAdminController
         $this->repository->update($request->all());
 
         return $this->redirect($request, $news);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\News\Models\News $news
+     *
+     * @return \Illuminate\Http\RedirectResponse|null
+     */
+    public function destroy(News $news)
+    {
+        if ($this->repository->delete($news)) {
+            return back();
+        }
     }
 }
