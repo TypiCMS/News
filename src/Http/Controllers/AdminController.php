@@ -68,18 +68,4 @@ class AdminController extends BaseAdminController
 
         return $this->redirect($request, $news);
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\News\Models\News $news
-     *
-     * @return \Illuminate\Http\RedirectResponse|null
-     */
-    public function destroy(News $news)
-    {
-        if ($this->repository->delete($news)) {
-            return back();
-        }
-    }
 }
