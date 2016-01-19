@@ -23,4 +23,4 @@
 
     @include('galleries::public._galleries')
 
-@stop
+@endsection
