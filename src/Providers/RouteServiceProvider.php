@@ -18,20 +18,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\News\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('news', 'TypiCMS\Modules\News\Models\News');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -50,6 +36,7 @@ class RouteServiceProvider extends ServiceProvider
                 foreach (config('translatable.locales') as $lang) {
                     if ($uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['as' => $lang.'.news', 'uses' => 'PublicController@index']);
+                        $router->get($uri.'/feed', $options + ['as' => $lang.'.news.feed', 'uses' => 'PublicController@feed']);
                         $router->get($uri.'/{slug}', $options + ['as' => $lang.'.news.slug', 'uses' => 'PublicController@show']);
                     }
                 }
@@ -58,12 +45,18 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->resource('admin/news', 'AdminController');
+            $router->get('admin/news', ['as' => 'admin.news.index', 'uses' => 'AdminController@index']);
+            $router->get('admin/news/create', ['as' => 'admin.news.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/news/{news}/edit', ['as' => 'admin.news.edit', 'uses' => 'AdminController@edit']);
+            $router->post('admin/news', ['as' => 'admin.news.store', 'uses' => 'AdminController@store']);
+            $router->put('admin/news/{news}', ['as' => 'admin.news.update', 'uses' => 'AdminController@update']);
 
             /*
              * API routes
              */
-            $router->resource('api/news', 'ApiController');
+            $router->get('api/news', ['as' => 'api.news.index', 'uses' => 'ApiController@index']);
+            $router->put('api/news/{news}', ['as' => 'api.news.update', 'uses' => 'ApiController@update']);
+            $router->delete('api/news/{news}', ['as' => 'api.news.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }

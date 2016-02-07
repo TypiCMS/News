@@ -2,8 +2,9 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Repositories\NewsInterface as Repository;
 
 class ApiController extends BaseApiController
@@ -20,7 +21,7 @@ class ApiController extends BaseApiController
      */
     public function store()
     {
-        $model = $this->repository->create(Input::all());
+        $model = $this->repository->create(Request::all());
         $error = $model ? false : true;
 
         return response()->json([
@@ -32,16 +33,30 @@ class ApiController extends BaseApiController
     /**
      * Update the specified resource in storage.
      *
-     * @param  $model
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function update()
+    {
+        $updated = $this->repository->update(Request::all());
+
+        return response()->json([
+            'error' => !$updated,
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\News\Models\News $news
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($model)
+    public function destroy(News $news)
     {
-        $error = $this->repository->update(Input::all()) ? false : true;
+        $deleted = $this->repository->delete($news);
 
         return response()->json([
-            'error' => $error,
-        ], 200);
+            'error' => !$deleted,
+        ]);
     }
 }
