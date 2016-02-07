@@ -9,6 +9,7 @@
         }
     ],
     "require": {
+        "roumen/feed": "~2.10",
         "typicms/core": "~2.7.0"
     },
     "autoload": {
