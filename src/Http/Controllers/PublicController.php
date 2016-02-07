@@ -66,7 +66,6 @@ class PublicController extends BasePublicController
             foreach ($models as $model) {
                 $feed->add($model->title, null, url($model->uri()), $model->created_at, $model->summary, $model->body);
             }
-
         }
 
         return $feed->render('atom');
