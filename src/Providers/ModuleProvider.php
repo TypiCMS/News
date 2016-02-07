@@ -50,6 +50,11 @@ class ModuleProvider extends ServiceProvider
         $app = $this->app;
 
         /*
+         * Register sitemap package
+         */
+        $app->register('Roumen\Feed\FeedServiceProvider');
+
+        /*
          * Register route service provider
          */
         $app->register('TypiCMS\Modules\News\Providers\RouteServiceProvider');
