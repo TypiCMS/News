@@ -58,15 +58,15 @@ class PublicController extends BasePublicController
             }
             $feed->link = url()->route(config('app.locale').'.news.feed');
             $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
-            if (isset($models[0]) && $models[0]->created_at) {
-                $feed->pubdate = $models[0]->created_at;
+            if (isset($models[0]) && $models[0]->date) {
+                $feed->pubdate = $models[0]->date;
             }
             $feed->lang = config('app.locale');
             $feed->setShortening(true); // true or false
             $feed->setTextLimit(100); // maximum length of description text
 
             foreach ($models as $model) {
-                $feed->add($model->title, null, url($model->uri()), $model->created_at, $model->summary, $model->body);
+                $feed->add($model->title, null, url($model->uri()), $model->date, $model->summary, $model->body);
             }
         }
 
