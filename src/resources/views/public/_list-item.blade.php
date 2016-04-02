@@ -1,5 +1,5 @@
 <li class="news" itemscope itemtype="http://schema.org/Article">
-    <a class="news-anchor" href="{{ route($lang . '.news.slug', $news->slug) }}" itemprop="url">
+    <a class="news-anchor" href="{{ route($lang.'.news.slug', $news->slug) }}" itemprop="url">
         {!! $news->present()->thumb(540, 400) !!}
         <meta itemprop="image" content="{{ $news->present()->thumbUrl() }}">
         <div class="news-info">
