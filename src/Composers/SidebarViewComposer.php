@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\News\Composers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Sidebar\SidebarGroup;
 use Maatwebsite\Sidebar\SidebarItem;
 
@@ -17,7 +18,7 @@ class SidebarViewComposer
                 $item->route('admin::index-news');
                 $item->append('admin::create-news');
                 $item->authorize(
-                    auth()->user()->can('index-news')
+                    Gate::allows('index-news')
                 );
             });
         });
