@@ -2,46 +2,39 @@
 
 namespace TypiCMS\Modules\News\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
+use Spatie\Translatable\Translatable;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class News extends Base
 {
     use Historable;
-    use Translatable;
+    use HasTranslations;
     use PresentableTrait;
 
     protected $presenter = 'TypiCMS\Modules\News\Presenters\ModulePresenter';
 
     protected $dates = ['date'];
 
+    protected $casts = [
+        'title' => 'array',
+        'slug' => 'array',
+        'status' => 'array',
+        'summary' => 'array',
+        'body' => 'array',
+    ];
+
     protected $fillable = [
         'date',
         'image',
-        // Translatable columns
         'title',
         'slug',
         'status',
         'summary',
         'body',
     ];
-
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
-        'title',
-        'slug',
-        'status',
-        'summary',
-        'body',
-    ];
-
-    protected $appends = ['status', 'title', 'thumb'];
 
     /**
      * Columns that are file.
@@ -51,6 +44,17 @@ class News extends Base
     public $attachments = [
         'image',
     ];
+
+    public function getTranslatableFields()
+    {
+        return [
+            'title',
+            'slug',
+            'status',
+            'summary',
+            'body',
+        ];
+    }
 
     /**
      * A news has many galleries.
