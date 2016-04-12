@@ -53,7 +53,6 @@ class ModuleProvider extends ServiceProvider
     {
         $app = $this->app;
 
-
         /*
          * Register sitemap package
          */
