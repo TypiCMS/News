@@ -39,6 +39,10 @@ class ModuleProvider extends ServiceProvider
             'News',
             'TypiCMS\Modules\News\Facades\Facade'
         );
+        AliasLoader::getInstance()->alias(
+            'Feed',
+            'Roumen\Feed\Feed'
+        );
 
         // Observers
         NewsTranslation::observe(new SlugObserver());
@@ -48,6 +52,8 @@ class ModuleProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
+
+        $this->app['config']->push('typicms.feeds', ['module' => 'news', 'route' => config('app.locale').'.news.feed']);
 
         /*
          * Register sitemap package
