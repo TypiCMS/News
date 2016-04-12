@@ -7,4 +7,5 @@ return [
     'Edit'         => 'Edit news',
     'Back'         => 'Back to news',
     'Published on' => 'Published on',
+    'feed'         => 'News feed',
 ];

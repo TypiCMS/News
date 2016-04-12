@@ -7,4 +7,5 @@ return [
     'Edit'         => 'Modifier l’actualité',
     'Back'         => 'Retour à la liste des actualités',
     'Published on' => 'Publié le',
+    'feed'         => 'Flux d’actualités',
 ];
