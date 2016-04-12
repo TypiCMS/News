@@ -53,12 +53,12 @@ class ModuleProvider extends ServiceProvider
     {
         $app = $this->app;
 
-        $this->app['config']->push('typicms.feeds', ['module' => 'news');
 
         /*
          * Register sitemap package
          */
         $app->register('Roumen\Feed\FeedServiceProvider');
+        $this->app['config']->push('typicms.feeds', ['module' => 'news']);
 
         /*
          * Register route service provider
