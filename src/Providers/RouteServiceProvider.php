@@ -33,7 +33,7 @@ class RouteServiceProvider extends ServiceProvider
              */
             if ($page = TypiCMS::getPageLinkedToModule('news')) {
                 $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (config('translatable.locales') as $lang) {
+                foreach (config('translatable-bootforms.locales') as $lang) {
                     if ($page->translate($lang)->status && $uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['as' => $lang.'.news', 'uses' => 'PublicController@index']);
                         $router->get($uri.'.xml', $options + ['as' => $lang.'.news.feed', 'uses' => 'PublicController@feed']);
