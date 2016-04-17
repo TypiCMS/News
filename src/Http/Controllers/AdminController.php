@@ -21,7 +21,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->all([], true);
+        $models = $this->repository->all([], true)->translate(config('typicms.content_locale'));
         app('JavaScript')->put('models', $models);
 
         return view('news::admin.index');

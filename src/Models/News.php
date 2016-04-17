@@ -19,6 +19,8 @@ class News extends Base
 
     protected $guarded = ['id', 'exit', 'galleries'];
 
+    protected $appends = ['thumb'];
+
     public $translatable = [
         'title',
         'slug',
