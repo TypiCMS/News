@@ -21,13 +21,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = collect([]);
-        // If we need only client vue-tables
-        // $models = $this->repository->all([], true)->translate(config('typicms.content_locale'));
-        // app('JavaScript')->put('models', $models);
-
-        return view('news::admin.index')
-            ->with(compact('models'));
+        return view('news::admin.index');
     }
 
     /**
