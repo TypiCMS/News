@@ -5,7 +5,7 @@
 @section('js')
 
 <script>
-    new Vue({
+    var table = new Vue({
         el: "#news",
         methods: {
             deleteMe: function (id) {
@@ -13,6 +13,7 @@
             }
         },
         data: {
+            loading: false,
             tableData: TypiCMS.models,
             columns: ['id', 'status', 'thumb', 'date', 'title'],
             options: {
@@ -29,7 +30,7 @@
                 },
                 templates: {
                     id: '<a href="javascript:void(0);" @click="$parent.deleteMe({id})"><span class="fa fa-remove"></span></a>&nbsp;&nbsp;&nbsp;<a class="btn btn-default btn-xs" href="news/{id}/edit">Edit</i></a>',
-                    status: '<div class="btn btn-xs btn-link" @click="action()">' +
+                    status: '<div @click="action()">' +
                         '<span class="fa switch" :class="{status} ? \'fa-toggle-on\' : \'fa-toggle-off\'"></span>' +
                     '</div>',
                     thumb: '<img src="{thumb}">'
@@ -41,6 +42,20 @@
             }
         }
     });
+
+    var timeout;
+    table.$on('vue-tables.loaded', function() {
+        window.clearTimeout(timeout);
+        this.loading = false;
+    });
+
+    table.$on('vue-tables.loading', function() {
+        var $this = this;
+        timeout = window.setTimeout(function(){
+            $this.loading = true;
+        }, 1000);
+    });
+
 </script>
 
 @endsection
@@ -62,7 +77,10 @@
     </div>
  -->
     <div class="table-responsive">
-      <v-server-table url="{{ route('api::index-news') }}" :columns="columns" :options="options"></v-server-table>
+        <div class="VueTables__loading" v-if="loading">
+            <span class="VueTables__spinner fa fa-spin fa-fw fa-gear fa-3x"></span>
+        </div>
+        <v-server-table url="{{ route('api::index-news') }}" :columns="columns" :options="options"></v-server-table>
     </div>
 
 </div>
