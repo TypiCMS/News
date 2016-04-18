@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'per_page' => 50,
+    'per_page'        => 50,
     'columns_in_list' => ['id', 'title', 'image', 'status', 'date'],
-    'order'    => [
+    'order'           => [
         'date'   => 'desc',
     ],
     'sidebar' => [
