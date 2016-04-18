@@ -14,7 +14,7 @@
         },
         data: {
             loading: false,
-            tableData: TypiCMS.models,
+            tableData: {!! $models !!},
             columns: ['id', 'status', 'thumb', 'date', 'title'],
             options: {
                 sortable: ['status', 'date', 'title'],
@@ -72,16 +72,18 @@
         @include('core::admin._lang-switcher')
     </div>
 
-<!--     <div class="table-responsive">
-      <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
+    @if ($models->count())
+    <div class="table-responsive">
+        <v-client-table :data="tableData" :columns="columns" :options="options"></v-client-table>
     </div>
- -->
+    @else
     <div class="table-responsive">
         <div class="VueTables__loading" v-if="loading">
             <span class="VueTables__spinner fa fa-spin fa-fw fa-gear fa-3x"></span>
         </div>
         <v-server-table url="{{ route('api::index-news') }}" :columns="columns" :options="options"></v-server-table>
     </div>
+    @endif
 
 </div>
 
