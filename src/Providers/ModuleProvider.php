@@ -10,7 +10,6 @@ use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Models\NewsTranslation;
 use TypiCMS\Modules\News\Repositories\CacheDecorator;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
 
