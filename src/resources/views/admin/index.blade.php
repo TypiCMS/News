@@ -18,6 +18,8 @@
     };
     </script>
 
+    @include('core::admin._table-config')
+
     @include('core::admin._button-create', ['module' => 'news'])
 
     <h1>@lang('news::global.name')</h1>
@@ -27,8 +29,8 @@
     </div>
 
     <div class="table-responsive">
-        @include('core::admin._v-client-table')
-        {{-- For server side filtering, just include core::admin._v-server-table --}}
+        @include('core::admin._v-client-table', ['data' => News::allFiltered(config('typicms.news.select'))])
+        {{-- For server side filtering, use @include('core::admin._v-server-table', ['url' => route('api::index-news')]) --}}
     </div>
 
 </div>
