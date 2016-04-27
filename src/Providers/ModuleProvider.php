@@ -41,7 +41,7 @@ class ModuleProvider extends ServiceProvider
         );
 
         // Observers
-        NewsTranslation::observe(new SlugObserver());
+        News::observe(new SlugObserver());
         News::observe(new FileObserver());
     }
 
