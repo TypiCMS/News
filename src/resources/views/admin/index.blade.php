@@ -29,8 +29,9 @@
     </div>
 
     <div class="table-responsive">
-        @include('core::admin._v-client-table', ['data' => News::allFiltered(config('typicms.news.select'))])
-        {{-- For server side filtering, use @include('core::admin._v-server-table', ['url' => route('api::index-news')]) --}}
+        @include('core::admin._v-server-table', ['url' => route('api::index-news')])
+        {{-- For client side filtering: --}}
+        {{-- @include('core::admin._v-client-table', ['data' => News::allFiltered(config('typicms.news.select'))]) --}}
     </div>
 
 </div>
