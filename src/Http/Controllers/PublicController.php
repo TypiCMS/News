@@ -28,7 +28,7 @@ class PublicController extends BasePublicController
     {
         $page = Request::input('page');
         $perPage = config('typicms.news.per_page');
-        $data = $this->repository->byPage($page, $perPage, ['translations']);
+        $data = $this->repository->byPage($page, $perPage);
         $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
 
         return view('news::public.index')
@@ -49,7 +49,7 @@ class PublicController extends BasePublicController
             $feed->setCache(60, 'typicmsNewsFeed');
         }
         if (!$feed->isCached()) {
-            $models = $this->repository->latest(10, ['translations']);
+            $models = $this->repository->latest(10);
 
             $feed->title = $page->title.' – '.TypiCMS::title();
             $feed->description = $page->body;
