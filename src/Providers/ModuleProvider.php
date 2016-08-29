@@ -23,7 +23,7 @@ class ModuleProvider extends ServiceProvider
         );
 
         $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page']], $modules));
+        $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page', 'has_feed']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'news');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'news');
@@ -48,8 +48,6 @@ class ModuleProvider extends ServiceProvider
     public function register()
     {
         $app = $this->app;
-
-        $this->app['config']->push('typicms.feeds', ['module' => 'news']);
 
         /*
          * Register route service provider
