@@ -2,18 +2,17 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Illuminate\Pagination\LengthAwarePaginator as Paginator;
 use Illuminate\Support\Facades\Request;
 use Roumen\Feed\Feed;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\News\Repositories\NewsInterface;
+use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class PublicController extends BasePublicController
 {
     private $feed;
 
-    public function __construct(NewsInterface $news, Feed $feed)
+    public function __construct(EloquentNews $news, Feed $feed)
     {
         $this->feed = $feed;
         parent::__construct($news);
@@ -28,8 +27,7 @@ class PublicController extends BasePublicController
     {
         $page = Request::input('page');
         $perPage = config('typicms.news.per_page');
-        $data = $this->repository->byPage($page, $perPage);
-        $models = new Paginator($data->items, $data->totalItems, $perPage, null, ['path' => Paginator::resolveCurrentPath()]);
+        $models = $this->repository->paginate($perPage, ['title', 'slug', 'image', 'summary', 'date'], 'page', $page);
 
         return view('news::public.index')
             ->with(compact('models'));
@@ -80,7 +78,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->repository->with(['galleries'])->findBy('slug->fr', $slug);
 
         return view('news::public.show')
             ->with(compact('model'));

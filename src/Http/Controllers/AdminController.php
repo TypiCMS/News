@@ -3,13 +3,13 @@
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\News\Repositories\EloquentNews;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Repositories\NewsInterface;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(NewsInterface $news)
+    public function __construct(EloquentNews $news)
     {
         parent::__construct($news);
     }

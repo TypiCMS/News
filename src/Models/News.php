@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\News\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class News extends Base
@@ -40,7 +41,7 @@ class News extends Base
      */
     public function galleries()
     {
-        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
+        return $this->morphToMany(Gallery::class, 'galleryable')
             ->withPivot('position')
             ->orderBy('position')
             ->withTimestamps();

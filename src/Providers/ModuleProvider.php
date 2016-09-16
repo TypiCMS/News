@@ -8,9 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Repositories\CacheDecorator;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class ModuleProvider extends ServiceProvider
@@ -67,14 +65,6 @@ class ModuleProvider extends ServiceProvider
             $view->page = TypiCMS::getPageLinkedToModule('news');
         });
 
-        $app->bind('TypiCMS\Modules\News\Repositories\NewsInterface', function (Application $app) {
-            $repository = new EloquentNews(new News());
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['news', 'galleries'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('News', EloquentNews::class);
     }
 }
