@@ -4,8 +4,8 @@ namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use TypiCMS\Modules\News\Repositories\EloquentNews;
 use TypiCMS\Modules\News\Models\News;
+use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class ApiController extends BaseApiController
 {
