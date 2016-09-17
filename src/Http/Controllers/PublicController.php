@@ -78,7 +78,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->with(['galleries'])->findBy('slug->fr', $slug);
+        $model = $this->repository->with(['galleries'])->bySlug($slug);
 
         return view('news::public.show')
             ->with(compact('model'));
