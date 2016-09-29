@@ -31,7 +31,7 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->getModel();
+        $model = $this->repository->createModel();
 
         return view('news::admin.create')
             ->with(compact('model'));
