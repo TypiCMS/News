@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
                 $router->get('news', 'AdminController@index')->name('admin::index-news');
                 $router->get('news/create', 'AdminController@create')->name('admin::create-news');
                 $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
@@ -55,7 +55,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * API routes
              */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
                 $router->get('news', 'ApiController@index')->name('api::index-news');
                 $router->put('news/{news}', 'ApiController@update')->name('api::update-news');
                 $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news');
