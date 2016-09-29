@@ -44,18 +44,22 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/news', 'AdminController@index')->name('admin::index-news');
-            $router->get('admin/news/create', 'AdminController@create')->name('admin::create-news');
-            $router->get('admin/news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
-            $router->post('admin/news', 'AdminController@store')->name('admin::store-news');
-            $router->put('admin/news/{news}', 'AdminController@update')->name('admin::update-news');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function(Router $router) {
+                $router->get('news', 'AdminController@index')->name('admin::index-news');
+                $router->get('news/create', 'AdminController@create')->name('admin::create-news');
+                $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
+                $router->post('news', 'AdminController@store')->name('admin::store-news');
+                $router->put('news/{news}', 'AdminController@update')->name('admin::update-news');
+            });
 
             /*
              * API routes
              */
-            $router->get('api/news', 'ApiController@index')->name('api::index-news');
-            $router->put('api/news/{news}', 'ApiController@update')->name('api::update-news');
-            $router->delete('api/news/{news}', 'ApiController@destroy')->name('api::destroy-news');
+            $router->group(['middleware' => 'api', 'prefix' => 'api'], function(Router $router) {
+                $router->get('news', 'ApiController@index')->name('api::index-news');
+                $router->put('news/{news}', 'ApiController@update')->name('api::update-news');
+                $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news');
+            });
         });
     }
 }
