@@ -74,8 +74,25 @@ class AdminController extends BaseAdminController
      */
     public function update(News $news, FormRequest $request)
     {
-        $this->repository->update(request('id'), $request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $news);
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\News\Models\News $news
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(News $news)
+    {
+        $deleted = $this->repository->delete($news);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }

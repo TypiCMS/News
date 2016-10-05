@@ -50,15 +50,8 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
                 $router->post('news', 'AdminController@store')->name('admin::store-news');
                 $router->put('news/{news}', 'AdminController@update')->name('admin::update-news');
-            });
-
-            /*
-             * API routes
-             */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
-                $router->get('news', 'ApiController@index')->name('api::index-news');
-                $router->put('news/{news}', 'ApiController@update')->name('api::update-news');
-                $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news');
+                $router->patch('news/{news}', 'AdminController@ajaxUpdate');
+                $router->delete('news/{news}', 'AdminController@destroy')->name('admin::destroy-news');
             });
         });
     }
