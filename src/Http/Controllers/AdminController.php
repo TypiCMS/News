@@ -79,7 +79,6 @@ class AdminController extends BaseAdminController
         return $this->redirect($request, $news);
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
