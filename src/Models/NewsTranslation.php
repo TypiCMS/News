@@ -6,6 +6,14 @@ use TypiCMS\Modules\Core\Models\BaseTranslation;
 
 class NewsTranslation extends BaseTranslation
 {
+    protected $fillable = [
+        'title',
+        'slug',
+        'status',
+        'summary',
+        'body',
+    ];
+
     /**
      * get the parent model.
      */

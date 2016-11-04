@@ -20,12 +20,6 @@ class News extends Base
     protected $fillable = [
         'date',
         'image',
-        // Translatable columns
-        'title',
-        'slug',
-        'status',
-        'summary',
-        'body',
     ];
 
     /**
@@ -70,9 +64,9 @@ class News extends Base
      *
      * @return string
      */
-    public function getStatusAttribute()
+    public function getStatusAttribute($value)
     {
-        return $this->status;
+        return $value;
     }
 
     /**
@@ -80,9 +74,9 @@ class News extends Base
      *
      * @return string title
      */
-    public function getTitleAttribute()
+    public function getTitleAttribute($value)
     {
-        return $this->title;
+        return $value;
     }
 
     /**
