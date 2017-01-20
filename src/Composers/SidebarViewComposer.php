@@ -11,8 +11,8 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        $view->sidebar->group(trans('global.menus.content'), function (SidebarGroup $group) {
-            $group->addItem(trans('news::global.name'), function (SidebarItem $item) {
+        $view->sidebar->group(__('global.menus.content'), function (SidebarGroup $group) {
+            $group->addItem(__('news::global.name'), function (SidebarItem $item) {
                 $item->id = 'news';
                 $item->icon = config('typicms.news.sidebar.icon', 'icon fa fa-fw fa-bullhorn');
                 $item->weight = config('typicms.news.sidebar.weight');

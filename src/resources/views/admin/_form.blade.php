@@ -24,15 +24,15 @@
 
         <div class="row">
             <div class="col-sm-6">
-                {!! BootForm::date(trans('validation.attributes.date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
+                {!! BootForm::date(__('validation.attributes.date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
             </div>
         </div>
 
         @include('core::form._title-and-slug')
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(trans('validation.attributes.online'), 'status') !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.summary'), 'summary')->rows(4) !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
+        {!! TranslatableBootForm::checkbox(__('validation.attributes.online'), 'status') !!}
+        {!! TranslatableBootForm::textarea(__('validation.attributes.summary'), 'summary')->rows(4) !!}
+        {!! TranslatableBootForm::textarea(__('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
 
     </div>
 
