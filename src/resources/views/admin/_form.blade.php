@@ -10,10 +10,10 @@
 
 <ul class="nav nav-tabs">
     <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('global.Content')</a>
+        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('Content')</a>
     </li>
     <li>
-        <a href="#tab-galleries" data-target="#tab-galleries" data-toggle="tab">@lang('global.Galleries')</a>
+        <a href="#tab-galleries" data-target="#tab-galleries" data-toggle="tab">@lang('Galleries')</a>
     </li>
 </ul>
 
@@ -30,7 +30,7 @@
 
         @include('core::form._title-and-slug')
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(__('Online'), 'status') !!}
+        {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
         {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
         {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
 
