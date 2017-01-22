@@ -6,7 +6,7 @@
 @section('image', $model->present()->thumbUrl())
 @section('bodyClass', 'body-news body-news-'.$model->id.' body-page body-page-'.$page->id)
 
-@section('main')
+@section('content')
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
 
