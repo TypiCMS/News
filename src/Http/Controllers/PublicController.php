@@ -54,7 +54,7 @@ class PublicController extends BasePublicController
             if (config('typicms.image')) {
                 $feed->logo = url('uploads/settings/'.config('typicms.image'));
             }
-            $feed->link = url()->route(config('app.locale').'.news.feed');
+            $feed->link = url()->route(config('app.locale').'::news.feed');
             $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
             if (isset($models[0]) && $models[0]->date) {
                 $feed->pubdate = $models[0]->date;
