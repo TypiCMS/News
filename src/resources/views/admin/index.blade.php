@@ -23,10 +23,10 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="status" class="status st-sort">Status</th>
-                    <th st-sort="image" class="image st-sort">Image</th>
-                    <th st-sort="date" st-sort-default="reverse" class="date st-sort">Date</th>
-                    <th st-sort="title" class="title st-sort">Title</th>
+                    <th st-sort="status" class="status st-sort">@lang('Status')</th>
+                    <th st-sort="image" class="image st-sort">@lang('Image')</th>
+                    <th st-sort="date" st-sort-default="reverse" class="date st-sort">@lang('Date')</th>
+                    <th st-sort="title" class="title st-sort">@lang('Title')</th>
                 </tr>
                 <tr>
                     <td colspan="5"></td>
