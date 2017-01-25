@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\News\Composers\SidebarViewComposer;
+use TypiCMS\Modules\News\Facades\News as NewsFacade;
 use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
 
@@ -31,10 +33,7 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../database' => base_path('database'),
         ], 'migrations');
 
-        AliasLoader::getInstance()->alias(
-            'News',
-            'TypiCMS\Modules\News\Facades\News'
-        );
+        AliasLoader::getInstance()->alias('News', NewsFacade::class);
 
         // Observers
         News::observe(new SlugObserver());
@@ -50,12 +49,12 @@ class ModuleProvider extends ServiceProvider
         /*
          * Register route service provider
          */
-        $app->register('TypiCMS\Modules\News\Providers\RouteServiceProvider');
+        $app->register(RouteServiceProvider::class);
 
         /*
          * Sidebar view composer
          */
-        $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\News\Composers\SidebarViewComposer');
+        $app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
