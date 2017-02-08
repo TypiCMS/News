@@ -7,7 +7,7 @@
 <div ng-app="typicms" ng-cloak ng-controller="ListController">
 
     @include('core::admin._button-create', ['module' => 'news'])
-{{ App::getLocale() }}
+
     <h1>
         <span>@{{ models.length }} @choice('news::global.news', 2)</span>
     </h1>
@@ -23,7 +23,7 @@
                 <tr>
                     <th class="delete"></th>
                     <th class="edit"></th>
-                    <th st-sort="status" class="status st-sort">{{ trans('Status') }}</th>
+                    <th st-sort="status" class="status st-sort">{{ __('Status') }}</th>
                     <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
                     <th st-sort="date" st-sort-default="reverse" class="date st-sort">{{ __('Date') }}</th>
                     <th st-sort="title" class="title st-sort">{{ __('Title') }}</th>
@@ -47,7 +47,7 @@
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
                     <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
-                    <td>@{{ model.title }}</td>
+                    <td>@{{ model.title | translated }}</td>
                 </tr>
             </tbody>
             <tfoot>
