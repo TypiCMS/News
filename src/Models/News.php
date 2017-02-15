@@ -20,7 +20,7 @@ class News extends Base
 
     protected $guarded = ['id', 'exit', 'galleries'];
 
-    protected $appends = ['thumb'];
+    protected $appends = ['thumb', 'title_translated'];
 
     public $translatable = [
         'title',
@@ -45,6 +45,17 @@ class News extends Base
             ->withPivot('position')
             ->orderBy('position')
             ->withTimestamps();
+    }
+
+    /**
+     * Append title_translated attribute.
+     *
+     * @return string
+     */
+    public function getTitleTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
