@@ -11,10 +11,10 @@
 
 <ul class="nav nav-tabs">
     <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('Content')</a>
+        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">{{ __('Content') }}</a>
     </li>
     <li>
-        <a href="#tab-galleries" data-target="#tab-galleries" data-toggle="tab">@lang('Galleries')</a>
+        <a href="#tab-galleries" data-target="#tab-galleries" data-toggle="tab">{{ __('Galleries') }}</a>
     </li>
 </ul>
 
