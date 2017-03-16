@@ -26,7 +26,7 @@ class PublicController extends BasePublicController
     {
         $page = request('page');
         $perPage = config('typicms.news.per_page');
-        $models = $this->repository->published()->paginate($perPage, ['title', 'slug', 'image', 'summary', 'date'], 'page', $page);
+        $models = $this->repository->published()->paginate($perPage, ['*'], 'page', $page);
 
         return view('news::public.index')
             ->with(compact('models'));
