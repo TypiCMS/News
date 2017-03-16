@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\News\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\News\Composers\SidebarViewComposer;
 use TypiCMS\Modules\News\Facades\News as NewsFacade;
@@ -37,7 +36,6 @@ class ModuleProvider extends ServiceProvider
 
         // Observers
         News::observe(new SlugObserver());
-        News::observe(new FileObserver());
     }
 
     public function register()

@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\News\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Galleries\Models\Gallery;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\News\Presenters\ModulePresenter;
@@ -31,23 +32,6 @@ class News extends Base
         'body',
     ];
 
-    public $attachments = [
-        'image',
-    ];
-
-    /**
-     * A news has many galleries.
-     *
-     * @return MorphToMany
-     */
-    public function galleries()
-    {
-        return $this->morphToMany(Gallery::class, 'galleryable')
-            ->withPivot('position')
-            ->orderBy('position')
-            ->withTimestamps();
-    }
-
     /**
      * Append title_translated attribute.
      *
@@ -68,5 +52,28 @@ class News extends Base
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
+    }
+
+    /**
+     * A news has many galleries.
+     *
+     * @return MorphToMany
+     */
+    public function galleries()
+    {
+        return $this->morphToMany(Gallery::class, 'galleryable')
+            ->withPivot('position')
+            ->orderBy('position')
+            ->withTimestamps();
+    }
+
+    /**
+     * This model belongs to one image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 }

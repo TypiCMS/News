@@ -16,7 +16,7 @@ class CreateNewsTable extends Migration
             $table->engine = 'InnoDB';
             $table->increments('id');
             $table->date('date');
-            $table->string('image')->nullable();
+            $table->integer('image_id')->unsigned()->nullable();
             $table->json('status');
             $table->json('title');
             $table->json('slug');
