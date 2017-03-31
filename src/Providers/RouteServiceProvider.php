@@ -50,7 +50,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
                 $router->post('news', 'AdminController@store')->name('admin::store-news');
                 $router->put('news/{news}', 'AdminController@update')->name('admin::update-news');
-                $router->patch('news/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-news');
+                $router->patch('news/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-news-ajax');
                 $router->delete('news/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-news');
             });
         });
