@@ -52,7 +52,7 @@
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
                     <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
-                    <td>@{{ model.title_translated }}</td>
+                    <td>@{{ model.status_translated }} @{{ model.title_translated }}</td>
                 </tr>
             </tbody>
             <tfoot>
