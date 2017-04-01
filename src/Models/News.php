@@ -22,7 +22,7 @@ class News extends Base
 
     protected $guarded = ['id', 'exit', 'galleries'];
 
-    protected $appends = ['thumb', 'title_translated'];
+    protected $appends = ['thumb', 'title_translated', 'status_translated'];
 
     public $translatable = [
         'title',
@@ -42,6 +42,18 @@ class News extends Base
         $locale = config('app.locale');
 
         return $this->translate('title', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append status_translated attribute.
+     *
+     * @return string
+     */
+    public function getStatusTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
     }
 
     /**
