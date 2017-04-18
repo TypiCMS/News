@@ -35,7 +35,7 @@ class RouteServiceProvider extends ServiceProvider
                 foreach (locales() as $lang) {
                     if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-news');
-                        $router->get($uri.'.xml', $options + ['uses' => 'PublicController@feed'])->name($lang.'::newsfeed');
+                        $router->get($uri.'.xml', $options + ['uses' => 'PublicController@feed'])->name($lang.'::news-feed');
                         $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::news');
                     }
                 }

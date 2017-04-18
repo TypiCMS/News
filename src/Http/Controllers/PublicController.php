@@ -2,18 +2,14 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Roumen\Feed\Feed;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class PublicController extends BasePublicController
 {
-    private $feed;
-
-    public function __construct(EloquentNews $news, Feed $feed)
+    public function __construct(EloquentNews $news)
     {
-        $this->feed = $feed;
         parent::__construct($news);
     }
 
@@ -41,7 +37,7 @@ class PublicController extends BasePublicController
         if (!$page) {
             return;
         }
-        $feed = $this->feed;
+        $feed = app('feed');
         if (config('typicms.cache')) {
             $feed->setCache(60, 'typicmsNewsFeed');
         }
@@ -53,7 +49,7 @@ class PublicController extends BasePublicController
             if (config('typicms.image')) {
                 $feed->logo = url('uploads/settings/'.config('typicms.image'));
             }
-            $feed->link = url()->route(config('app.locale').'::news.feed');
+            $feed->link = url()->route(config('app.locale').'::news-feed');
             $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
             if (isset($models[0]) && $models[0]->date) {
                 $feed->pubdate = $models[0]->date;
