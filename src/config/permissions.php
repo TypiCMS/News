@@ -2,11 +2,9 @@
 
 return [
     'news' => [
-        'index-news' => 'Show list',
+        'index-news' => 'View list',
         'create-news' => 'Create',
-        'store-news' => 'Store',
         'edit-news' => 'Edit',
-        'update-news' => 'Update',
         'destroy-news' => 'Destroy',
     ],
 ];
