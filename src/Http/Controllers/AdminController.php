@@ -65,7 +65,9 @@ class AdminController extends BaseAdminController
      */
     public function store(FormRequest $request)
     {
-        $model = $this->repository->create($request->all());
+        $data = $request->all();
+        $model = $this->repository->create($data);
+        $this->syncGalleries($model, $data['galleries']);
 
         return $this->redirect($request, $model);
     }
@@ -80,7 +82,9 @@ class AdminController extends BaseAdminController
      */
     public function update(News $news, FormRequest $request)
     {
-        $this->repository->update($request->id, $request->all());
+        $data = $request->all();
+        $this->repository->update($news->id, $data);
+        $this->syncGalleries($news, $data['galleries']);
 
         return $this->redirect($request, $news);
     }
