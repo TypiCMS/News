@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-sm-6">
-        {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
+        {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker')->required() !!}
     </div>
 </div>
 
