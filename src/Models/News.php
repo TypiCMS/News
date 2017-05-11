@@ -19,7 +19,7 @@ class News extends Base
 
     protected $dates = ['date'];
 
-    protected $guarded = ['id', 'exit', 'galleries'];
+    protected $guarded = ['id', 'exit'];
 
     protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
 

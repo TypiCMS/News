@@ -21,6 +21,6 @@
         <div class="news-body" itemprop="articleBody">{!! $model->present()->body !!}</div>
     </article>
 
-    @include('galleries::public._galleries')
+    @include('files::public._files')
 
 @endsection
