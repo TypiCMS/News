@@ -26,7 +26,6 @@ class ModuleProvider extends ServiceProvider
         $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page', 'has_feed']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'news');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'news');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([

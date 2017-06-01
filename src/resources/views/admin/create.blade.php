@@ -1,12 +1,12 @@
 @extends('core::admin.master')
 
-@section('title', __('news::global.New'))
+@section('title', __('New news'))
 
 @section('content')
 
     @include('core::admin._button-back', ['module' => 'news'])
     <h1>
-        @lang('news::global.New')
+        @lang('New news')
     </h1>
 
     {!! BootForm::open()->action(route('admin::index-news'))->multipart()->role('form') !!}

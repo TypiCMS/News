@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('news::global.name'))
+@section('title', __('News'))
 
 @section('content')
 
@@ -8,9 +8,7 @@
 
     @include('core::admin._button-create', ['module' => 'news'])
 
-    <h1>
-        <span>@{{ models.length }} @choice('news::global.news', 2)</span>
-    </h1>
+    <h1>@lang('News')</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._button-select')
@@ -33,7 +31,7 @@
                 <tr>
                     <td colspan="5"></td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>
