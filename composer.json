@@ -17,6 +17,13 @@
             "TypiCMS\\Modules\\News\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "TypiCMS\\Modules\\News\\Providers\\ModuleProvider"
+            ]
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
