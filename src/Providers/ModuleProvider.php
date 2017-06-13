@@ -36,6 +36,18 @@ class ModuleProvider extends ServiceProvider
 
         // Observers
         News::observe(new SlugObserver());
+
+        /*
+         * Sidebar view composer
+         */
+        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+
+        /*
+         * Add the page in the view.
+         */
+        $this->app->view->composer('news::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('news');
+        });
     }
 
     public function register()
@@ -48,18 +60,6 @@ class ModuleProvider extends ServiceProvider
          * Register route service provider
          */
         $app->register(RouteServiceProvider::class);
-
-        /*
-         * Sidebar view composer
-         */
-        $app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
-
-        /*
-         * Add the page in the view.
-         */
-        $app->view->composer('news::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('news');
-        });
 
         $app->bind('News', EloquentNews::class);
     }
