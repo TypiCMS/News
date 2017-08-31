@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\News\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 
 class RouteServiceProvider extends ServiceProvider
@@ -20,24 +21,22 @@ class RouteServiceProvider extends ServiceProvider
     /**
      * Define the routes for the application.
      *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
+     * @return null
      */
-    public function map(Router $router)
+    public function map()
     {
-        $router->group(['namespace' => $this->namespace], function (Router $router) {
+        Route::group(['namespace' => $this->namespace], function (Router $router) {
 
             /*
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('news')) {
                 $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (config('translatable.locales') as $lang) {
-                    if ($page->translate($lang)->status && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['as' => $lang.'.news', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'.xml', $options + ['as' => $lang.'.news.feed', 'uses' => 'PublicController@feed']);
-                        $router->get($uri.'/{slug}', $options + ['as' => $lang.'.news.slug', 'uses' => 'PublicController@show']);
+                foreach (locales() as $lang) {
+                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-news');
+                        $router->get($uri.'.xml', $options + ['uses' => 'PublicController@feed'])->name($lang.'::news-feed');
+                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::news');
                     }
                 }
             }
@@ -45,18 +44,16 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/news', 'AdminController@index')->name('admin::index-news');
-            $router->get('admin/news/create', 'AdminController@create')->name('admin::create-news');
-            $router->get('admin/news/{news}/edit', 'AdminController@edit')->name('admin::edit-news');
-            $router->post('admin/news', 'AdminController@store')->name('admin::store-news');
-            $router->put('admin/news/{news}', 'AdminController@update')->name('admin::update-news');
-
-            /*
-             * API routes
-             */
-            $router->get('api/news', 'ApiController@index')->name('api::index-news');
-            $router->put('api/news/{news}', 'ApiController@update')->name('api::update-news');
-            $router->delete('api/news/{news}', 'ApiController@destroy')->name('api::destroy-news');
+            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+                $router->get('news', 'AdminController@index')->name('admin::index-news')->middleware('can:see-all-news');
+                $router->get('news/create', 'AdminController@create')->name('admin::create-news')->middleware('can:create-news');
+                $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news')->middleware('can:update-news');
+                $router->get('news/{news}/files', 'AdminController@files')->name('admin::edit-news-files')->middleware('can:update-news');
+                $router->post('news', 'AdminController@store')->name('admin::store-news')->middleware('can:create-news');
+                $router->put('news/{news}', 'AdminController@update')->name('admin::update-news')->middleware('can:update-news');
+                $router->patch('news/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-news-ajax')->middleware('can:update-news');
+                $router->delete('news/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-news')->middleware('can:delete-news');
+            });
         });
     }
 }

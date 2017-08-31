@@ -2,16 +2,14 @@
 
 @section('bodyClass', 'body-news body-news-index body-page body-page-'.$page->id)
 
-@section('main')
+@section('content')
 
     {!! $page->present()->body !!}
 
-    @include('galleries::public._galleries', ['model' => $page])
+    @include('files::public._files', ['model' => $page])
 
-    @if ($models->count())
-    @include('news::public._list', ['items' => $models])
-    @endif
+    @includeWhen($models->count() > 0, 'news::public._list', ['items' => $models])
 
-    {!! $models->appends(Request::except('page'))->render() !!}
+    {!! $models->appends(Request::except('page'))->links() !!}
 
 @endsection

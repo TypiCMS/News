@@ -2,32 +2,28 @@
 
 namespace TypiCMS\Modules\News\Models;
 
-use Dimsav\Translatable\Translatable;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\News\Presenters\ModulePresenter;
 
 class News extends Base
 {
+    use HasTranslations;
     use Historable;
-    use Translatable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\News\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $dates = ['date'];
 
-    protected $fillable = [
-        'date',
-        'image',
-    ];
+    protected $guarded = ['id', 'exit'];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
+
+    public $translatable = [
         'title',
         'slug',
         'status',
@@ -35,48 +31,38 @@ class News extends Base
         'body',
     ];
 
-    protected $appends = ['status', 'title', 'thumb'];
-
     /**
-     * Columns that are file.
-     *
-     * @var array
-     */
-    public $attachments = [
-        'image',
-    ];
-
-    /**
-     * A news has many galleries.
-     *
-     * @return MorphToMany
-     */
-    public function galleries()
-    {
-        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
-            ->withPivot('position')
-            ->orderBy('position')
-            ->withTimestamps();
-    }
-
-    /**
-     * Append status attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getTitleTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
-     * Append title attribute from translation table.
+     * Append status_translated attribute.
      *
-     * @return string title
+     * @return string
      */
-    public function getTitleAttribute($value)
+    public function getStatusTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
     }
 
     /**
@@ -87,5 +73,16 @@ class News extends Base
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
+    }
+
+    /**
+     * A news can have many files.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
     }
 }

@@ -1,47 +1,22 @@
-@section('js')
+@push('js')
     <script src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
-@endsection
+@endpush
 
-@include('core::admin._buttons-form')
+@component('core::admin._buttons-form', ['model' => $model])
+@endcomponent
 
 {!! BootForm::hidden('id') !!}
 
-@include('core::admin._image-fieldset', ['field' => 'image'])
+@include('files::admin._files-selector')
 
-<ul class="nav nav-tabs">
-    <li class="active">
-        <a href="#tab-main" data-target="#tab-main" data-toggle="tab">@lang('global.Content')</a>
-    </li>
-    <li>
-        <a href="#tab-galleries" data-target="#tab-galleries" data-toggle="tab">@lang('global.Galleries')</a>
-    </li>
-</ul>
-
-<div class="tab-content">
-
-    {{-- Main tab --}}
-    <div class="tab-pane fade in active" id="tab-main">
-
-        <div class="row">
-            <div class="col-sm-6">
-                {!! BootForm::date(trans('validation.attributes.date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
-            </div>
-        </div>
-
-        @include('core::form._title-and-slug')
-        {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(trans('validation.attributes.online'), 'status') !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.summary'), 'summary')->rows(4) !!}
-        {!! TranslatableBootForm::textarea(trans('validation.attributes.body'), 'body')->addClass('ckeditor') !!}
-
+<div class="row">
+    <div class="col-sm-6">
+        {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker')->required() !!}
     </div>
-
-    {{-- Galleries tab --}}
-    <div class="tab-pane fade in" id="tab-galleries">
-
-        @include('core::admin._galleries-fieldset')
-
-    </div>
-
 </div>
 
+@include('core::form._title-and-slug')
+{!! TranslatableBootForm::hidden('status')->value(0) !!}
+{!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+{!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
+{!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}

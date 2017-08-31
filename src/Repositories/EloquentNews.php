@@ -2,13 +2,12 @@
 
 namespace TypiCMS\Modules\News\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\EloquentRepository;
+use TypiCMS\Modules\News\Models\News;
 
-class EloquentNews extends RepositoriesAbstract implements NewsInterface
+class EloquentNews extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'news';
+
+    protected $model = News::class;
 }

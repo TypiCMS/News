@@ -2,8 +2,8 @@
 
 return [
     'per_page' => 50,
-    'order'    => [
-        'date'   => 'desc',
+    'order' => [
+        'date' => 'desc',
     ],
     'sidebar' => [
         'weight' => 3,
