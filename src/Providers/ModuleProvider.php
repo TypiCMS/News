@@ -30,7 +30,7 @@ class ModuleProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/news'),
-        ], 'views');
+        ], 'typicms-views');
 
         AliasLoader::getInstance()->alias('News', NewsFacade::class);
 
