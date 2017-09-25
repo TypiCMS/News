@@ -47,7 +47,7 @@ class PublicController extends BasePublicController
             $feed->title = $page->title.' – '.TypiCMS::title();
             $feed->description = $page->body;
             if (config('typicms.image')) {
-                $feed->logo = url('uploads/settings/'.config('typicms.image'));
+                $feed->logo = url('storage/settings/'.config('typicms.image'));
             }
             $feed->link = url()->route(config('app.locale').'::news-feed');
             $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
