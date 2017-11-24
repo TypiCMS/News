@@ -22,7 +22,7 @@ class PublicController extends BasePublicController
     {
         $page = request('page');
         $perPage = config('typicms.news.per_page');
-        $models = $this->repository->published()->paginate($perPage, ['*'], 'page', $page);
+        $models = $this->repository->with('files')->published()->paginate($perPage, ['*'], 'page', $page);
 
         return view('news::public.index')
             ->with(compact('models'));
@@ -73,7 +73,7 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->repository->with('files')->bySlug($slug);
 
         return view('news::public.show')
             ->with(compact('model'));
