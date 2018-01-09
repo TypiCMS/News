@@ -25,7 +25,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        Route::group(['namespace' => $this->namespace], function (Router $router) {
+        Route::namespace($this->namespace)->group(function (Router $router) {
 
             /*
              * Front office routes
@@ -44,7 +44,7 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
+            $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
                 $router->get('news', 'AdminController@index')->name('admin::index-news')->middleware('can:see-all-news');
                 $router->get('news/create', 'AdminController@create')->name('admin::create-news')->middleware('can:create-news');
                 $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news')->middleware('can:update-news');
