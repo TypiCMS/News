@@ -31,14 +31,16 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('news')) {
-                $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (locales() as $lang) {
-                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-news');
-                        $router->get($uri.'.xml', $options + ['uses' => 'PublicController@feed'])->name($lang.'::news-feed');
-                        $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::news');
+                $router->middleware('public')->group(function (Router $router) use ($page) {
+                    $options = $page->private ? ['middleware' => 'auth'] : [];
+                    foreach (locales() as $lang) {
+                        if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                            $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-news');
+                            $router->get($uri.'.xml', $options + ['uses' => 'PublicController@feed'])->name($lang.'::news-feed');
+                            $router->get($uri.'/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::news');
+                        }
                     }
-                }
+                });
             }
 
             /*
