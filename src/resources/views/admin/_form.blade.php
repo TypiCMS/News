@@ -16,7 +16,9 @@
 </div>
 
 @include('core::form._title-and-slug')
-{!! TranslatableBootForm::hidden('status')->value(0) !!}
-{!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+<div class="form-group">
+    {!! TranslatableBootForm::hidden('status')->value(0) !!}
+    {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+</div>
 {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
 {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
