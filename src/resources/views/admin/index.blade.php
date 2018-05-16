@@ -10,7 +10,7 @@
 
 @section('content')
 
-<div id="listItems">
+<div id="itemList">
 
     @include('core::admin._button-create', ['module' => 'news'])
 
