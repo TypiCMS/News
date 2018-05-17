@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
+use Illuminate\Http\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
@@ -19,10 +20,13 @@ class AdminController extends BaseAdminController
      *
      * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $models = $this->repository->with('files')->findAll();
-        app('JavaScript')->put('models', $models);
+        if ($request->wantsJson()) {
+            $models = $this->repository->with('files')->findAll();
+
+            return $models;
+        }
 
         return view('news::admin.index');
     }

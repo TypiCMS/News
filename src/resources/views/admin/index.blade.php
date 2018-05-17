@@ -10,55 +10,46 @@
 
 @section('content')
 
-<div id="itemList">
+<div>
 
     @include('core::admin._button-create', ['module' => 'news'])
 
     <h1>@lang('News')</h1>
 
-    <div class="btn-toolbar">
-        {{-- @include('core::admin._button-select') --}}
-        {{-- @include('core::admin._button-actions') --}}
-        @include('core::admin._lang-switcher-for-list')
-    </div>
+    <item-list url="{{ route('admin::index-news') }}">
 
-    <div class="table-responsive">
+        <template slot="buttons">
+            @include('core::admin._button-actions')
+            @include('core::admin._lang-switcher-for-list')
+        </template>
 
-        <table class="table table-main">
+        <template slot="columns">
+            <th class="delete"></th>
+            <th class="edit"></th>
+            <th class="status">{{ __('Status') }}</th>
+            <th class="image">{{ __('Image') }}</th>
+            <th class="date">{{ __('Date') }}</th>
+            <th class="title_translated">{{ __('Title') }}</th>
+        </template>
 
-            <thead>
-                <tr>
-                    <th class="delete"></th>
-                    <th class="edit"></th>
-                    <th class="status">{{ __('Status') }}</th>
-                    <th class="image">{{ __('Image') }}</th>
-                    <th class="date">{{ __('Date') }}</th>
-                    <th class="title_translated">{{ __('Title') }}</th>
-                </tr>
-            </thead>
+        <template slot-scope="{ model }">
+            <td>
+                <input type="checkbox">
+            </td>
+            <td>
+                @include('core::admin._button-edit', ['module' => 'news'])
+            </td>
+            <td>
+                <typi-btn-status :model="model"></typi-btn-status>
+            </td>
+            <td>
+                <img :src="model.thumb" alt="">
+            </td>
+            <td>@{{ model.date | date }}</td>
+            <td>@{{ model.title_translated }}</td>
+        </template>
 
-            <tbody>
-                <tr v-for="model in models">
-                    <td>
-                        <input type="checkbox">
-                    </td>
-                    <td>
-                        @include('core::admin._button-edit', ['module' => 'news'])
-                    </td>
-                    <td>
-                        <typi-btn-status :model="model"></typi-btn-status>
-                    </td>
-                    <td>
-                        <img :src="model.thumb" alt="">
-                    </td>
-                    <td>@{{ model.date }}</td>
-                    <td>@{{ model.title_translated }}</td>
-                </tr>
-            </tbody>
-
-        </table>
-
-    </div>
+    </item-list>
 
 </div>
 
