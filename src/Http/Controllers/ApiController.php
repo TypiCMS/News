@@ -19,6 +19,7 @@ class ApiController extends BaseApiController
     {
         $models = QueryBuilder::for(News::class)
             ->allowedFilters('date')
+            ->with('files')
             ->get();
 
         return $models;

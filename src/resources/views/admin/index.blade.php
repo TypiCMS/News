@@ -14,7 +14,7 @@
 
     <item-list
         url-base="{{ route('api::index-news') }}"
-        url-parameters="include=files&fields[news]=id,date,status,title&fields[files]=id,path"
+        url-parameters="fields[news]=id,date,status,title"
         title="News"
         :sorting="['-date']">
 
