@@ -22,12 +22,6 @@ class AdminController extends BaseAdminController
      */
     public function index(Request $request)
     {
-        if ($request->wantsJson()) {
-            $models = $this->repository->with('files')->findAll();
-
-            return $models;
-        }
-
         return view('news::admin.index');
     }
 
