@@ -14,9 +14,9 @@
 
     <item-list
         url-base="{{ route('api::index-news') }}"
-        url-parameters="fields[news]=id,date,status,title"
-        title="News"
-        :sorting="['-date']">
+        url-parameters="fields[news]=id,date&locale={{ config('typicms.content_locale') }}"
+        title="news"
+        :sorting="['title_translated']">
 
         <template slot="add-button">
             @include('core::admin._button-create', ['module' => 'news'])
@@ -28,10 +28,10 @@
 
         <template slot="columns" slot-scope="{ sortArray }">
             <column-header name="edit"></column-header>
-            <column-header name="status" translated sortable :sort-array="sortArray">Status</column-header>
+            <column-header name="status_translated" sortable :sort-array="sortArray">Status</column-header>
             <column-header name="image">Image</column-header>
             <column-header name="date" sortable :sort-array="sortArray">Date</column-header>
-            <column-header name="title" translated sortable :sort-array="sortArray">Title</column-header>
+            <column-header name="title_translated" sortable :sort-array="sortArray">Title</column-header>
         </template>
 
         <template slot="table-row" slot-scope="{ model, checkedModels }">
@@ -40,7 +40,7 @@
             <td><typi-btn-status :model="model"></typi-btn-status></td>
             <td><img :src="model.thumb" alt=""></td>
             <td>@{{ model.date | date }}</td>
-            <td>@{{ model.title | translated }}</td>
+            <td>@{{ model.title_translated }}</td>
         </template>
 
     </item-list>

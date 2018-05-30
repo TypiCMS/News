@@ -21,7 +21,7 @@ class News extends Base
 
     protected $guarded = ['id', 'exit'];
 
-    protected $appends = ['image', 'thumb', 'title_translated', 'status_translated'];
+    protected $appends = ['image', 'thumb'];
 
     public $translatable = [
         'title',
@@ -30,30 +30,6 @@ class News extends Base
         'summary',
         'body',
     ];
-
-    /**
-     * Append title_translated attribute.
-     *
-     * @return string
-     */
-    public function getTitleTranslatedAttribute()
-    {
-        $locale = config('app.locale');
-
-        return $this->translate('title', config('typicms.content_locale', $locale));
-    }
-
-    /**
-     * Append status_translated attribute.
-     *
-     * @return string
-     */
-    public function getStatusTranslatedAttribute()
-    {
-        $locale = config('app.locale');
-
-        return $this->translate('status', config('typicms.content_locale', $locale));
-    }
 
     /**
      * Append image attribute.
