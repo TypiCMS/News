@@ -19,8 +19,9 @@ class ApiController extends BaseApiController
     {
         $models = QueryBuilder::for(News::class)
             ->allowedFilters('date')
+            ->translated(['title', 'status'])
             ->with('files')
-            ->get();
+            ->paginate($request->input('per_page'));
 
         return $models;
     }
