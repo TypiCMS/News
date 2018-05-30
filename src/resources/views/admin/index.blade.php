@@ -28,10 +28,10 @@
 
         <template slot="columns" slot-scope="{ sortArray }">
             <column-header name="edit"></column-header>
-            <column-header name="status_translated" sortable :sort-array="sortArray">Status</column-header>
-            <column-header name="image">Image</column-header>
-            <column-header name="date" sortable :sort-array="sortArray">Date</column-header>
-            <column-header name="title_translated" sortable :sort-array="sortArray">Title</column-header>
+            <column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></column-header>
+            <column-header name="image" :label="$t('Image')"></column-header>
+            <column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></column-header>
+            <column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></column-header>
         </template>
 
         <template slot="table-row" slot-scope="{ model, checkedModels }">
