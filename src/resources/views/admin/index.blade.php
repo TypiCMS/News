@@ -34,8 +34,8 @@
             <column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></column-header>
         </template>
 
-        <template slot="table-row" slot-scope="{ model, checkedModels }">
-            <td class="checkbox"><typi-checkbox :model="model" :checked-models-prop="checkedModels"></typi-checkbox></td>
+        <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
+            <td class="checkbox"><typi-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></typi-checkbox></td>
             <td>@include('core::admin._button-edit', ['module' => 'news'])</td>
             <td><typi-btn-status :model="model"></typi-btn-status></td>
             <td><img :src="model.thumb" alt=""></td>
