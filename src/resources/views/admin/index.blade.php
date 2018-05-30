@@ -14,8 +14,10 @@
 
     <item-list
         url-base="{{ route('api::index-news') }}"
-        url-parameters="fields[news]=id,date&locale={{ config('typicms.content_locale') }}"
+        locale="{{ config('typicms.content_locale') }}"
+        url-parameters="fields[news]=id,date"
         title="news"
+        :searchable="['date']"
         :sorting="['title_translated']">
 
         <template slot="add-button">
