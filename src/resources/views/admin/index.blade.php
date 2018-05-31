@@ -29,17 +29,18 @@
         </template>
 
         <template slot="columns" slot-scope="{ sortArray }">
-            <column-header name="edit"></column-header>
-            <column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></column-header>
-            <column-header name="image" :label="$t('Image')"></column-header>
-            <column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></column-header>
-            <column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></column-header>
+            <item-list-column-header name="checkbox"></item-list-column-header>
+            <item-list-column-header name="edit"></item-list-column-header>
+            <item-list-column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></item-list-column-header>
+            <item-list-column-header name="image" :label="$t('Image')"></item-list-column-header>
+            <item-list-column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></item-list-column-header>
+            <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
         </template>
 
         <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
-            <td class="checkbox"><typi-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></typi-checkbox></td>
+            <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
             <td>@include('core::admin._button-edit', ['module' => 'news'])</td>
-            <td><typi-btn-status :model="model"></typi-btn-status></td>
+            <td><item-list-status-button :model="model"></item-list-status-button></td>
             <td><img :src="model.thumb" alt=""></td>
             <td>@{{ model.date | date }}</td>
             <td>@{{ model.title_translated }}</td>
