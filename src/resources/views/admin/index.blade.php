@@ -18,7 +18,7 @@
         url-parameters="fields[news]=id,date"
         title="news"
         :searchable="['date']"
-        :sorting="['title_translated']">
+        :sorting="['-date']">
 
         <template slot="add-button">
             @include('core::admin._button-create', ['module' => 'news'])
