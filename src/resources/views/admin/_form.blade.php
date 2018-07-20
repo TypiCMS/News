@@ -7,7 +7,7 @@
 
 {!! BootForm::hidden('id') !!}
 
-@include('files::admin._files-selector')
+{{-- @include('files::admin._files-selector') --}}
 
 <div class="row">
     <div class="col-sm-6">
