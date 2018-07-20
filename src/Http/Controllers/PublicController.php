@@ -59,7 +59,7 @@ class PublicController extends BasePublicController
             $feed->setTextLimit(100); // maximum length of description text
 
             foreach ($models as $model) {
-                $feed->add($model->title, null, url($model->uri()), $model->date, $model->summary, $model->body);
+                $feed->add($model->title, null, url($model->uri()), $model->date, $model->summary, $model->present()->body);
             }
         }
 
