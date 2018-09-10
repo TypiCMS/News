@@ -13,7 +13,7 @@
 <item-list
     url-base="{{ route('api::index-news') }}"
     locale="{{ config('typicms.content_locale') }}"
-    url-parameters="fields[news]=id,date"
+    fields="id,date"
     title="news"
     :searchable="['date']"
     :sorting="['-date']">
