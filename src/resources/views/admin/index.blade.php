@@ -14,6 +14,7 @@
     url-base="{{ route('api::index-news') }}"
     locale="{{ config('typicms.content_locale') }}"
     fields="id,date"
+    translatable-fields="status,title"
     table="news"
     title="news"
     :searchable="['date']"
