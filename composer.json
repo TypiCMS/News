@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "roumen/feed": "~2.10",
+        "laravelium/feed": "~3.0",
         "laravel/framework": "~5.5.0"
     },
     "autoload": {
