@@ -33,8 +33,8 @@
         <item-list-column-header name="edit"></item-list-column-header>
         <item-list-column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></item-list-column-header>
         <item-list-column-header name="image" :label="$t('Image')"></item-list-column-header>
-        <item-list-column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')" filterable></item-list-column-header>
-        <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')" filterable></item-list-column-header>
+        <item-list-column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></item-list-column-header>
+        <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
     </template>
 
     <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
