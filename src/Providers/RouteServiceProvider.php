@@ -50,7 +50,6 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('news', 'AdminController@index')->name('admin::index-news')->middleware('can:see-all-news');
                 $router->get('news/create', 'AdminController@create')->name('admin::create-news')->middleware('can:create-news');
                 $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news')->middleware('can:update-news');
-                $router->get('news/{news}/files', 'AdminController@files')->name('admin::edit-news-files')->middleware('can:update-news');
                 $router->post('news', 'AdminController@store')->name('admin::store-news')->middleware('can:create-news');
                 $router->put('news/{news}', 'AdminController@update')->name('admin::update-news')->middleware('can:update-news');
             });
@@ -60,6 +59,7 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->get('news', 'ApiController@index')->name('api::index-news');
+                $router->get('news/{news}/files', 'ApiController@files')->name('api::edit-news-files');
                 $router->patch('news/{news}', 'ApiController@update')->name('api::update-news');
                 $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news');
             });

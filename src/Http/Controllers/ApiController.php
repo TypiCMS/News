@@ -59,4 +59,13 @@ class ApiController extends BaseApiController
             'error' => !$deleted,
         ]);
     }
+
+    public function files(News $news)
+    {
+        $data = [
+            'models' => $news->files,
+        ];
+
+        return response()->json($data, 200);
+    }
 }

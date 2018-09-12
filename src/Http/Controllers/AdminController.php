@@ -100,18 +100,4 @@ class AdminController extends BaseAdminController
             'error' => !$deleted,
         ]);
     }
-
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function files(News $news)
-    {
-        $data = [
-            'models' => $news->files,
-        ];
-
-        return response()->json($data, 200);
-    }
 }
