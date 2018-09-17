@@ -1,9 +1,3 @@
-@push('js')
-<script>
-
-</script>
-@endpush
-
 @extends('core::admin.master')
 
 @section('title', __('News'))

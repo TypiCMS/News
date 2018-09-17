@@ -17,13 +17,13 @@ class ApiController extends BaseApiController
 
     public function index(Request $request)
     {
-        $models = QueryBuilder::for(News::class)
+        $data = QueryBuilder::for(News::class)
             ->allowedFilters('date')
             ->translated(explode(',', $request->input('translatable_fields')))
             ->with('files')
             ->paginate($request->input('per_page'));
 
-        return $models;
+        return $data;
     }
 
     protected function update(News $news, Request $request)
