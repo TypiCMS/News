@@ -19,7 +19,7 @@ class ApiController extends BaseApiController
     {
         $data = QueryBuilder::for(News::class)
             ->allowedFilters('date')
-            ->translated(explode(',', $request->input('translatable_fields')))
+            ->translated($request->input('translatable_fields'))
             ->with('files')
             ->paginate($request->input('per_page'));
 
