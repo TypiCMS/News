@@ -59,10 +59,10 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('news', 'ApiController@index')->name('api::index-news');
-                    $router->get('news/{news}/files', 'ApiController@files')->name('api::edit-news-files');
-                    $router->patch('news/{news}', 'ApiController@update')->name('api::update-news');
-                    $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news');
+                    $router->get('news', 'ApiController@index')->name('api::index-news')->middleware('can:see-all-news');
+                    $router->get('news/{news}/files', 'ApiController@files')->name('api::edit-news-files')->middleware('can:update-news');
+                    $router->patch('news/{news}', 'ApiController@updatePartial')->name('api::update-news')->middleware('can:update-news');
+                    $router->delete('news/{news}', 'ApiController@destroy')->name('api::destroy-news')->middleware('can:delete-news');
                 });
             });
         });

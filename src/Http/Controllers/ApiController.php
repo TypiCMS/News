@@ -26,7 +26,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function update(News $news, Request $request)
+    protected function updatePartial(News $news, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -45,10 +45,6 @@ class ApiController extends BaseApiController
         $saved = $news->save();
 
         $this->repository->forgetCache();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
     }
 
     public function destroy(News $news)
