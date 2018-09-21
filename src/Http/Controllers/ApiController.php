@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\News\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\News\Models\News;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
 
@@ -58,10 +59,16 @@ class ApiController extends BaseApiController
 
     public function files(News $news)
     {
-        $data = [
-            'models' => $news->files,
-        ];
+        return $news->files;
+    }
 
-        return response()->json($data, 200);
+    public function attachFiles(News $news, Request $request)
+    {
+        return $this->repository->attachFiles($news, $request);
+    }
+
+    public function detachFile(News $news, File $file)
+    {
+        return $this->repository->detachFile($news, $file);
     }
 }

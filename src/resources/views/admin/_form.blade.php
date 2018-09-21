@@ -7,8 +7,8 @@
 
 {!! BootForm::hidden('id') !!}
 
-<filepicker :options="{ modal: true, dropzone: false, multiple: true }"></filepicker>
-<files related-table="{{ $model->getTable() }}" related-id="{{ $model->id }}"></files>
+<filepicker related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></filepicker>
+<files related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></files>
 
 <div class="row">
     <div class="col-sm-6">

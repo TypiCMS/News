@@ -5,7 +5,7 @@
 @section('content')
 
 <item-list
-    url-base="{{ route('api::index-news') }}"
+    url-base="/api/news"
     locale="{{ config('typicms.content_locale') }}"
     fields="id,date"
     translatable-fields="status,title"
