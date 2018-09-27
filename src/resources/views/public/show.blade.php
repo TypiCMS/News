@@ -19,8 +19,8 @@
         </div>
         <p class="news-summary" itemprop="headline">{{ nl2br($model->summary) }}</p>
         <div class="news-body" itemprop="articleBody">{!! $model->present()->body !!}</div>
+        @include('files::public._documents')
+        @include('files::public._images')
     </article>
-
-    @include('files::public._files')
 
 @endsection
