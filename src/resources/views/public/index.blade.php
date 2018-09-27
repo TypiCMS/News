@@ -6,9 +6,8 @@
 
     {!! $page->present()->body !!}
 
-        @include('files::public._documents', ['model' => $page])
+    @include('files::public._documents', ['model' => $page])
     @include('files::public._images', ['model' => $page])
-
 
     @includeWhen($models->count() > 0, 'news::public._list', ['items' => $models])
 
