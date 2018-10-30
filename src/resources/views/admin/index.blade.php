@@ -11,7 +11,8 @@
     translatable-fields="status,title"
     table="news"
     title="news"
-    :searchable="['date']"
+    include="images"
+    :searchable="['date,title']"
     :sorting="['-date']">
 
     <template slot="add-button">

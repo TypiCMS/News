@@ -39,7 +39,7 @@ class News extends Base
      */
     public function getImageAttribute()
     {
-        return $this->images()->first();
+        return $this->images->first();
     }
 
     /**
