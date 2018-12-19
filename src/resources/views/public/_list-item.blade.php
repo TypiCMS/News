@@ -1,5 +1,5 @@
 <li class="newslist-item" itemscope itemtype="http://schema.org/Article">
-    <a class="newslist-item-link" href="{{ route($lang.'::news', $news->slug) }}" itemprop="url">
+    <a class="newslist-item-link" href="{{ $news->uri() }}" itemprop="url">
         {!! $news->present()->thumb(540, 400) !!}
         <meta itemprop="image" content="{{ $news->present()->thumbUrl() }}">
         <div class="newslist-item-info">
