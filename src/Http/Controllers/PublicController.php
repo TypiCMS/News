@@ -20,9 +20,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $page = request('page');
-        $perPage = config('typicms.news.per_page');
-        $models = $this->repository->paginate($perPage, ['*'], 'page', $page);
+        $models = $this->repository->paginate(config('typicms.news.per_page'));
 
         return view('news::public.index')
             ->with(compact('models'));
