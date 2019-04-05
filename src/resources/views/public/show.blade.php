@@ -10,15 +10,12 @@
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
 
-    <article class="news" itemscope itemtype="http://schema.org/Article">
-        <h1 class="news-title" itemprop="name">{{ $model->title }}</h1>
-        <img src="{!! $model->present()->image(null, 200) !!}" alt="">
-        <meta itemprop="image" content="{{ $model->present()->image() }}">
-        <div class="news-date-wrapper" class="date">@lang('Published on')
-            <time class="news-date" itemprop="datePublished" datetime="{{ $model->date->toIso8601String() }}">{{ $model->present()->dateLocalized }}</time>
-        </div>
-        <p class="news-summary" itemprop="headline">{{ nl2br($model->summary) }}</p>
-        <div class="news-body" itemprop="articleBody">{!! $model->present()->body !!}</div>
+    <article class="news">
+        <h1 class="news-title">{{ $model->title }}</h1>
+        <img class="news-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
+        <div class="news-date">{{ $model->present()->dateLocalized }}</div>
+        <p class="news-summary">{{ nl2br($model->summary) }}</p>
+        <div class="news-body">{!! $model->present()->body !!}</div>
         @include('files::public._documents')
         @include('files::public._images')
     </article>
