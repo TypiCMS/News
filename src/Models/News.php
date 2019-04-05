@@ -40,7 +40,7 @@ class News extends Base
      */
     public function getThumbAttribute()
     {
-        return $this->present()->thumbSrc(null, 44);
+        return $this->present()->image(null, 44);
     }
 
     /**

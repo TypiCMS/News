@@ -1,7 +1,7 @@
 <li class="news-list-item" itemscope itemtype="http://schema.org/Article">
     <a class="news-list-item-link" href="{{ $news->uri() }}" itemprop="url">
-        {!! $news->present()->thumb(540, 400) !!}
-        <meta itemprop="image" content="{{ $news->present()->thumbUrl() }}">
+        <img src="{!! $news->present()->image(540, 400) !!}" alt="">
+        <meta itemprop="image" content="{{ $news->present()->image() }}">
         <div class="news-list-item-info">
             <h2 class="news-list-item-title" itemprop="name">{{ $news->title }}</h2>
             <div class="news-list-item-date-wrapper">@lang('Published on')
