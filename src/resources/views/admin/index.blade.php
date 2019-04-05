@@ -7,11 +7,11 @@
 <item-list
     url-base="/api/news"
     locale="{{ config('typicms.content_locale') }}"
-    fields="id,date"
+    fields="id,image_id,date"
     translatable-fields="status,title"
     table="news"
     title="news"
-    include="images"
+    include="image"
     :searchable="['date,title']"
     :sorting="['-date']">
 
@@ -32,7 +32,7 @@
         <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
         <td>@include('core::admin._button-edit', ['module' => 'news'])</td>
         <td><item-list-status-button :model="model"></item-list-status-button></td>
-        <td><img :src="model.thumb" alt=""></td>
+        <td><img :src="model.thumb" alt="" width="22"></td>
         <td>@{{ model.date | date }}</td>
         <td>@{{ model.title_translated }}</td>
     </template>
