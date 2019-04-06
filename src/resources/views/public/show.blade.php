@@ -10,6 +10,8 @@
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
 
+    @include('news::public._json-ld')
+
     <article class="news">
         <h1 class="news-title">{{ $model->title }}</h1>
         <img class="news-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
