@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
+use Illuminate\Support\Facades\Storage;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\News\Repositories\EloquentNews;
@@ -45,7 +46,7 @@ class PublicController extends BasePublicController
             $feed->title = $page->title.' – '.TypiCMS::title();
             $feed->description = $page->body;
             if (config('typicms.image')) {
-                $feed->logo = url('storage/settings/'.config('typicms.image'));
+                $feed->logo = Storage::url('settings/'.config('typicms.image'));
             }
             $feed->link = url()->route(config('app.locale').'::news-feed');
             $feed->setDateFormat('datetime'); // 'datetime', 'timestamp' or 'carbon'
