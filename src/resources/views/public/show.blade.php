@@ -16,7 +16,7 @@
         <h1 class="news-title">{{ $model->title }}</h1>
         <img class="news-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
         <div class="news-date">{{ $model->present()->dateLocalized }}</div>
-        <p class="news-summary">{{ nl2br($model->summary) }}</p>
+        <p class="news-summary">{!! nl2br($model->summary) !!}</p>
         <div class="news-body">{!! $model->present()->body !!}</div>
         @include('files::public._documents')
         @include('files::public._images')
