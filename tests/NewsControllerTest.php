@@ -1,6 +1,5 @@
 <?php
 
-
 class NewsControllerTest extends TestCase
 {
     public function testNewsListAndClickOnButtonNew()
