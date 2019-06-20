@@ -21,7 +21,9 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $models = $this->repository->paginate(config('typicms.news.per_page'));
+        $models = $this->repository
+            ->with('image')
+            ->paginate(config('typicms.news.per_page'));
 
         return view('news::public.index')
             ->with(compact('models'));
@@ -72,7 +74,13 @@ class PublicController extends BasePublicController
      */
     public function show($slug)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->repository
+            ->with([
+                'image',
+                'images',
+                'documents',
+            ])
+            ->bySlug($slug);
 
         return view('news::public.show')
             ->with(compact('model'));
