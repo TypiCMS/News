@@ -14,11 +14,11 @@
     "dateModified": "{{ $news->updated_at }}",
     "author": {
         "@type": "Organization",
-        "name": "microStart"
+        "name": "{{ config('app.name') }}"
     },
     "publisher": {
         "@type": "Organization",
-        "name": "microStart",
+        "name": "{{ config('app.name') }}",
         "logo": {
             "@type": "ImageObject",
             "url": "{{ Storage::url('settings/' . config('typicms.image')) }}"
