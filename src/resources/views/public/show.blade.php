@@ -10,7 +10,7 @@
 
     @include('core::public._btn-prev-next', ['module' => 'News', 'model' => $model])
 
-    @include('news::public._json-ld')
+    @include('news::public._json-ld', ['news' => $model])
 
     <article class="news">
         <h1 class="news-title">{{ $model->title }}</h1>

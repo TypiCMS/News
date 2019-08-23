@@ -1,4 +1,3 @@
-@include('news::public._json-ld', ['model' => $news])
 <li class="news-list-item">
     <a class="news-list-item-link" href="{{ $news->uri() }}">
         <img class="news-list-item-image" src="{!! $news->present()->image(540, 400) !!}" alt="">

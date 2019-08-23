@@ -4,14 +4,14 @@
     "@type": "NewsArticle",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "{{ url($model->uri()) }}"
+        "@id": "{{ url($news->uri()) }}"
     },
-    "headline": "{{ $model->title }}",
+    "headline": "{{ $news->title }}",
     "image": [
-        "{{ $model->present()->image() }}"
+        "{{ $news->present()->image() }}"
     ],
-    "datePublished": "{{ $model->date }}",
-    "dateModified": "{{ $model->updated_at }}",
+    "datePublished": "{{ $news->date }}",
+    "dateModified": "{{ $news->updated_at }}",
     "author": {
         "@type": "Organization",
         "name": "microStart"
@@ -24,6 +24,6 @@
             "url": "{{ Storage::url('settings/' . config('typicms.image')) }}"
         }
     },
-    "description": "{{ preg_replace( "/\r|\n/", " ", $model->summary) }}"
+    "description": "{{ preg_replace( "/\r|\n/", " ", $news->summary) }}"
 }
 </script>
