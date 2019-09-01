@@ -9,15 +9,9 @@ use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class ApiController extends BaseApiController
 {
-    public function __construct(EloquentNews $news)
-    {
-        parent::__construct($news);
-    }
-
     public function index(Request $request)
     {
         $data = QueryBuilder::for(News::class)
@@ -49,12 +43,12 @@ class ApiController extends BaseApiController
         }
         $saved = $news->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
     }
 
     public function destroy(News $news)
     {
-        $deleted = $this->repository->delete($news);
+        $deleted = $news->delete();
 
         return response()->json([
             'error' => !$deleted,
@@ -68,11 +62,11 @@ class ApiController extends BaseApiController
 
     public function attachFiles(News $news, Request $request)
     {
-        return $this->repository->attachFiles($news, $request);
+        return $this->model->attachFiles($news, $request);
     }
 
     public function detachFile(News $news, File $file)
     {
-        return $this->repository->detachFile($news, $file);
+        return $this->model->detachFile($news, $file);
     }
 }

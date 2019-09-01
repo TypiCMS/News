@@ -5,15 +5,9 @@ namespace TypiCMS\Modules\News\Http\Controllers;
 use Illuminate\Support\Facades\Storage;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(EloquentNews $news)
-    {
-        parent::__construct($news);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +37,7 @@ class PublicController extends BasePublicController
             $feed->setCache(60, 'typicmsNewsFeed');
         }
         if (!$feed->isCached()) {
-            $models = $this->repository->latest(10);
+            $models = $this->model->latest(10);
 
             $feed->title = $page->title.' – '.TypiCMS::title();
             $feed->description = $page->body;

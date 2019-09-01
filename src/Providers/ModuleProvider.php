@@ -9,7 +9,6 @@ use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\News\Composers\SidebarViewComposer;
 use TypiCMS\Modules\News\Facades\News as NewsFacade;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -65,6 +64,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('News', EloquentNews::class);
+        $app->bind('News', News::class);
     }
 }

@@ -6,15 +6,9 @@ use Illuminate\Http\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
-use TypiCMS\Modules\News\Repositories\EloquentNews;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(EloquentNews $news)
-    {
-        parent::__construct($news);
-    }
-
     /**
      * List models.
      *
@@ -32,7 +26,7 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->createModel();
+        $model = new;
 
         return view('news::admin.create')
             ->with(compact('model'));
@@ -61,7 +55,7 @@ class AdminController extends BaseAdminController
     public function store(FormRequest $request)
     {
         $data = $request->all();
-        $model = $this->repository->create($data);
+        $model = ::create($data);
 
         return $this->redirect($request, $model);
     }
@@ -77,7 +71,7 @@ class AdminController extends BaseAdminController
     public function update(News $news, FormRequest $request)
     {
         $data = $request->all();
-        $this->repository->update($news->id, $data);
+        ::update($news->id, $data);
 
         return $this->redirect($request, $news);
     }
