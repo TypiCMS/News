@@ -2,76 +2,45 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
 
 class AdminController extends BaseAdminController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index(Request $request)
+    public function index(): View
     {
         return view('news::admin.index');
     }
 
-    /**
-     * Create form for a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
-        $model = new;
+        $model = new News;
 
         return view('news::admin.create')
             ->with(compact('model'));
     }
 
-    /**
-     * Edit form for the specified resource.
-     *
-     * @param \TypiCMS\Modules\News\Models\News $news
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(News $news)
+    public function edit(News $news): View
     {
         return view('news::admin.edit')
             ->with(['model' => $news]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \TypiCMS\Modules\News\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(FormRequest $request)
+    public function store(FormRequest $request): RedirectResponse
     {
         $data = $request->all();
-        $model = ::create($data);
+        $model = News::create($data);
 
         return $this->redirect($request, $model);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \TypiCMS\Modules\News\Models\News               $news
-     * @param \TypiCMS\Modules\News\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(News $news, FormRequest $request)
+    public function update(News $news, FormRequest $request): RedirectResponse
     {
         $data = $request->all();
-        ::update($news->id, $data);
+        $news->update($news->id, $data);
 
         return $this->redirect($request, $news);
     }

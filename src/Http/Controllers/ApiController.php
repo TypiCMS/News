@@ -2,7 +2,10 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -12,7 +15,7 @@ use TypiCMS\Modules\News\Models\News;
 
 class ApiController extends BaseApiController
 {
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(News::class)
             ->allowedFilters([
@@ -25,7 +28,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(News $news, Request $request)
+    protected function updatePartial(News $news, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -42,11 +45,9 @@ class ApiController extends BaseApiController
             $news->$key = $value;
         }
         $saved = $news->save();
-
-        $this->model->forgetCache();
     }
 
-    public function destroy(News $news)
+    public function destroy(News $news): JsonResponse
     {
         $deleted = $news->delete();
 
@@ -55,18 +56,18 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    public function files(News $news)
+    public function files(News $news): Collection
     {
         return $news->files;
     }
 
-    public function attachFiles(News $news, Request $request)
+    public function attachFiles(News $news, Request $request): JsonResponse
     {
-        return $this->model->attachFiles($news, $request);
+        return $news->attachFiles($request);
     }
 
-    public function detachFile(News $news, File $file)
+    public function detachFile(News $news, File $file): array
     {
-        return $this->model->detachFile($news, $file);
+        return $news->detachFile($file);
     }
 }
