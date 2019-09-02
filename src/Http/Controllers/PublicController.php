@@ -3,30 +3,23 @@
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\News\Models\News;
 
 class PublicController extends BasePublicController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
-        $models = $this->repository
-            ->with('image')
+        $models = News::with('image')
             ->paginate(config('typicms.news.per_page'));
 
         return view('news::public.index')
             ->with(compact('models'));
     }
 
-    /**
-     * Generate Atom feed.
-     */
-    public function feed()
+    public function feed(): View
     {
         $page = TypiCMS::getPageLinkedToModule('news');
         if (!$page) {
@@ -61,20 +54,15 @@ class PublicController extends BasePublicController
         return $feed->render('atom');
     }
 
-    /**
-     * Show news.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function show($slug)
+    public function show($slug): View
     {
-        $model = $this->repository
-            ->with([
+        $model = News::with([
                 'image',
                 'images',
                 'documents',
             ])
-            ->bySlug($slug);
+            ->where(column('slug'), $slug)
+            ->firstOrFails();
 
         return view('news::public.show')
             ->with(compact('model'));
