@@ -28,7 +28,7 @@ class PublicController extends BasePublicController
                 'images',
                 'documents',
             ])
-            ->bySlug($slug)
+            ->whereSlugIs($slug)
             ->firstOrFail();
 
         return view('news::public.show')
