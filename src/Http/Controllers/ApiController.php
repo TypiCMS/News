@@ -45,6 +45,10 @@ class ApiController extends BaseApiController
             $news->$key = $value;
         }
         $saved = $news->save();
+
+        return response()->json([
+            'error' => !$saved,
+        ]);
     }
 
     public function destroy(News $news): JsonResponse
