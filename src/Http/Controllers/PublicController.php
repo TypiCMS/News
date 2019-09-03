@@ -20,6 +20,21 @@ class PublicController extends BasePublicController
             ->with(compact('models'));
     }
 
+    public function show($slug): View
+    {
+        $model = News::published()
+            ->with([
+                'image',
+                'images',
+                'documents',
+            ])
+            ->bySlug($slug)
+            ->firstOrFail();
+
+        return view('news::public.show')
+            ->with(compact('model'));
+    }
+
     public function feed(): ?Response
     {
         $page = TypiCMS::getPageLinkedToModule('news');
@@ -56,20 +71,5 @@ class PublicController extends BasePublicController
         }
 
         return $feed->render('atom');
-    }
-
-    public function show($slug): View
-    {
-        $model = News::published()
-            ->with([
-                'image',
-                'images',
-                'documents',
-            ])
-            ->bySlug($slug)
-            ->firstOrFail();
-
-        return view('news::public.show')
-            ->with(compact('model'));
     }
 }
