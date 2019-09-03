@@ -40,7 +40,7 @@ class AdminController extends BaseAdminController
     public function update(News $news, FormRequest $request): RedirectResponse
     {
         $data = $request->all();
-        $news->update($news->id, $data);
+        $news->update($data);
 
         return $this->redirect($request, $news);
     }
