@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
@@ -19,18 +20,21 @@ class PublicController extends BasePublicController
             ->with(compact('models'));
     }
 
-    public function feed(): View
+    public function feed(): ?Response
     {
         $page = TypiCMS::getPageLinkedToModule('news');
         if (!$page) {
-            return;
+            return null;
         }
         $feed = app('feed');
         if (config('typicms.cache')) {
             $feed->setCache(60, 'typicmsNewsFeed');
         }
         if (!$feed->isCached()) {
-            $models = $this->model->latest(10);
+            $models = News::published()
+                ->order()
+                ->take(10)
+                ->get();
 
             $feed->title = $page->title.' – '.TypiCMS::title();
             $feed->description = $page->body;
