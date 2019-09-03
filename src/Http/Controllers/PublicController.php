@@ -62,7 +62,7 @@ class PublicController extends BasePublicController
                 'documents',
             ])
             ->where(column('slug'), $slug)
-            ->firstOrFails();
+            ->firstOrFail();
 
         return view('news::public.show')
             ->with(compact('model'));
