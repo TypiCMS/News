@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "laravelium/feed": "~3.0",
         "laravel/framework": "~6.0"
     },
     "autoload": {
