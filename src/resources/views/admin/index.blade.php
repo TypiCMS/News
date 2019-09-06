@@ -12,7 +12,6 @@
     title="news"
     include="image"
     appends="thumb"
-    appends="thumb"
     :searchable="['title']"
     :sorting="['-date']">
 
