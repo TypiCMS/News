@@ -13,7 +13,9 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = News::published()->with('image')
+        $models = News::published()
+            ->order()
+            ->with('image')
             ->paginate(config('typicms.news.per_page'));
 
         return view('news::public.index')
