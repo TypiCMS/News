@@ -14,7 +14,9 @@
 
     <article class="news">
         <h1 class="news-title">{{ $model->title }}</h1>
-        <img class="news-image" src="{!! $model->present()->image(null, 200) !!}" alt="">
+        @isset($model->image)
+        <img class="news-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        @endisset
         <div class="news-date">{{ $model->present()->dateLocalized }}</div>
         <p class="news-summary">{!! nl2br($model->summary) !!}</p>
         <div class="news-body">{!! $model->present()->body !!}</div>
