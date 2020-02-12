@@ -18,8 +18,12 @@
         <img class="news-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
         @endisset
         <div class="news-date">{{ $model->present()->dateLocalized }}</div>
+        @isset($model->summary)
         <p class="news-summary">{!! nl2br($model->summary) !!}</p>
+        @endisset
+        @isset($model->body)
         <div class="news-body">{!! $model->present()->body !!}</div>
+        @endisset
         @include('files::public._documents')
         @include('files::public._images')
     </article>
