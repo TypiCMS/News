@@ -3,7 +3,7 @@
 @section('title', $model->title.' – '.__('News').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('image', $model->present()->image())
+@section('image', $model->present()->image(1200, 630))
 @section('bodyClass', 'body-news body-news-'.$model->id.' body-page body-page-'.$page->id)
 
 @section('content')
