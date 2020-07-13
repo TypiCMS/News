@@ -15,7 +15,12 @@
     <article class="news">
         <h1 class="news-title">{{ $model->title }}</h1>
         @empty(!$model->image)
-        <img class="news-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        <picture class="news-picture">
+            <img class="news-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
+            @empty(!$model->image->description)
+            <legend class="news-picture-legend">{{ $model->image->description }}</legend>
+            @endempty
+        </picture>
         @endempty
         <div class="news-date">{{ $model->present()->dateLocalized }}</div>
         @empty(!$model->summary)
