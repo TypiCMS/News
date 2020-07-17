@@ -4,16 +4,16 @@
 
 @section('content')
 
-    <div class="header">
-        @include('core::admin._button-back', ['module' => 'news'])
-        <h1 class="header-title @if (!$model->present()->title)text-muted @endif">
-            {{ $model->present()->title ?: __('Untitled') }}
-        </h1>
-    </div>
+<div class="header">
+    @include('core::admin._button-back', ['module' => 'news'])
+    <h1 class="header-title @if (!$model->present()->title)text-muted @endif">
+        {{ $model->present()->title ?: __('Untitled') }}
+    </h1>
+</div>
 
-    {!! BootForm::open()->put()->action(route('admin::update-news', $model->id))->multipart()->role('form') !!}
-    {!! BootForm::bind($model) !!}
-        @include('news::admin._form')
-    {!! BootForm::close() !!}
+{!! BootForm::open()->put()->action(route('admin::update-news', $model->id))->multipart()->role('form') !!}
+{!! BootForm::bind($model) !!}
+@include('news::admin._form')
+{!! BootForm::close() !!}
 
 @endsection
