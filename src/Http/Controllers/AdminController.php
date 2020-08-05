@@ -31,7 +31,7 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->except('file_ids');
         $model = News::create($data);
 
         return $this->redirect($request, $model);
@@ -39,7 +39,7 @@ class AdminController extends BaseAdminController
 
     public function update(News $news, FormRequest $request): RedirectResponse
     {
-        $data = $request->all();
+        $data = $request->except('file_ids');
         $news->update($data);
 
         return $this->redirect($request, $news);
