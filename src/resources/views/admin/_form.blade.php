@@ -10,7 +10,7 @@
 
 <file-manager></file-manager>
 <file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
-<files-field-field :init-files="{{ $model->files }}"></files-field>
+<files-field :init-files="{{ $model->files }}"></files-field>
 
 <div class="row">
     <div class="col-sm-6">
