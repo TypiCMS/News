@@ -14,6 +14,11 @@
 
     <article class="news">
         <h1 class="news-title">{{ $model->title }}</h1>
+        <div class="news-date">{{ $model->present()->dateLocalized }}</div>
+        @empty(!$model->summary)
+        <p class="news-summary">{!! nl2br($model->summary) !!}</p>
+        @endempty
+        @include('news::public._social-links')
         @empty(!$model->image)
         <picture class="news-picture">
             <img class="news-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
@@ -21,10 +26,6 @@
             <legend class="news-picture-legend">{{ $model->image->description }}</legend>
             @endempty
         </picture>
-        @endempty
-        <div class="news-date">{{ $model->present()->dateLocalized }}</div>
-        @empty(!$model->summary)
-        <p class="news-summary">{!! nl2br($model->summary) !!}</p>
         @endempty
         @empty(!$model->body)
         <div class="news-body">{!! $model->present()->body !!}</div>
