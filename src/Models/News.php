@@ -22,7 +22,7 @@ class News extends Base
 
     protected $dates = ['date'];
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     public $translatable = [
         'title',

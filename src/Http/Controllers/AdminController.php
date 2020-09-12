@@ -31,16 +31,14 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $model = News::create($data);
+        $news = News::create($request->validated());
 
-        return $this->redirect($request, $model);
+        return $this->redirect($request, $news);
     }
 
     public function update(News $news, FormRequest $request): RedirectResponse
     {
-        $data = $request->validated();
-        $news->update($data);
+        $news->update($request->validated());
 
         return $this->redirect($request, $news);
     }
