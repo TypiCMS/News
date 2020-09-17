@@ -2,15 +2,12 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\News\Models\News;
 
 class ApiController extends BaseApiController
@@ -47,29 +44,5 @@ class ApiController extends BaseApiController
     public function destroy(News $news)
     {
         $news->delete();
-    }
-
-    /**
-     * @deprecated
-     */
-    public function files(News $news): Collection
-    {
-        return $news->files;
-    }
-
-    /**
-     * @deprecated
-     */
-    public function attachFiles(News $news, Request $request): JsonResponse
-    {
-        return $news->attachFiles($request);
-    }
-
-    /**
-     * @deprecated
-     */
-    public function detachFile(News $news, File $file): void
-    {
-        $news->detachFile($file);
     }
 }
