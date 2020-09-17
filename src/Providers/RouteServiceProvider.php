@@ -44,11 +44,11 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
-                $router->get('news', 'AdminController@index')->name('admin::index-news')->middleware('can:see-all-news');
-                $router->get('news/create', 'AdminController@create')->name('admin::create-news')->middleware('can:create-news');
-                $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news')->middleware('can:update-news');
-                $router->post('news', 'AdminController@store')->name('admin::store-news')->middleware('can:create-news');
-                $router->put('news/{news}', 'AdminController@update')->name('admin::update-news')->middleware('can:update-news');
+                $router->get('news', 'AdminController@index')->name('admin::index-news')->middleware('can:read news');
+                $router->get('news/create', 'AdminController@create')->name('admin::create-news')->middleware('can:create news');
+                $router->get('news/{news}/edit', 'AdminController@edit')->name('admin::edit-news')->middleware('can:update news');
+                $router->post('news', 'AdminController@store')->name('admin::store-news')->middleware('can:create news');
+                $router->put('news/{news}', 'AdminController@update')->name('admin::update-news')->middleware('can:update news');
             });
 
             /*
@@ -56,13 +56,13 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('news', 'ApiController@index')->middleware('can:see-all-news');
-                    $router->patch('news/{news}', 'ApiController@updatePartial')->middleware('can:update-news');
-                    $router->delete('news/{news}', 'ApiController@destroy')->middleware('can:delete-news');
+                    $router->get('news', 'ApiController@index')->middleware('can:read news');
+                    $router->patch('news/{news}', 'ApiController@updatePartial')->middleware('can:update news');
+                    $router->delete('news/{news}', 'ApiController@destroy')->middleware('can:delete news');
 
-                    $router->get('news/{news}/files', 'ApiController@files')->middleware('can:update-news');
-                    $router->post('news/{news}/files', 'ApiController@attachFiles')->middleware('can:update-news');
-                    $router->delete('news/{news}/files/{file}', 'ApiController@detachFile')->middleware('can:update-news');
+                    $router->get('news/{news}/files', 'ApiController@files')->middleware('can:update news');
+                    $router->post('news/{news}/files', 'ApiController@attachFiles')->middleware('can:update news');
+                    $router->delete('news/{news}/files/{file}', 'ApiController@detachFile')->middleware('can:update news');
                 });
             });
         });

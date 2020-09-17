@@ -2,9 +2,9 @@
 
 return [
     'news' => [
-        'see-all-news' => 'View list',
-        'create-news' => 'Create',
-        'update-news' => 'Edit',
-        'delete-news' => 'Delete',
+        'read news' => 'Read',
+        'create news' => 'Create',
+        'update news' => 'Edit',
+        'delete news' => 'Delete',
     ],
 ];
