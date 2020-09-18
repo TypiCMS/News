@@ -10,7 +10,7 @@ use TypiCMS\Modules\News\Composers\SidebarViewComposer;
 use TypiCMS\Modules\News\Facades\News as NewsFacade;
 use TypiCMS\Modules\News\Models\News;
 
-class ModuleProvider extends ServiceProvider
+class ModuleServiceProvider extends ServiceProvider
 {
     public function boot()
     {
