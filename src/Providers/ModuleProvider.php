@@ -23,7 +23,7 @@ class ModuleProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'news');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_news_table.php.stub' => getMigrationFileName('news'),
+            __DIR__.'/../database/migrations/create_news_table.php.stub' => getMigrationFileName('create_news_table'),
         ], 'migrations');
 
         $this->publishes([
