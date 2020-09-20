@@ -4,7 +4,7 @@ return [
     'news' => [
         'read news' => 'Read',
         'create news' => 'Create',
-        'update news' => 'Edit',
+        'update news' => 'Update',
         'delete news' => 'Delete',
     ],
 ];
