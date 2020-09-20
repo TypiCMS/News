@@ -40,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
                 $router->get('news', [AdminController::class, 'index'])->name('admin::index-news')->middleware('can:read news');
                 $router->get('news/create', [AdminController::class, 'create'])->name('admin::create-news')->middleware('can:create news');
-                $router->get('news/{news}/edit', [AdminController::class, 'edit'])->name('admin::edit-news')->middleware('can:update news');
+                $router->get('news/{news}/edit', [AdminController::class, 'edit'])->name('admin::edit-news')->middleware('can:read news');
                 $router->post('news', [AdminController::class, 'store'])->name('admin::store-news')->middleware('can:create news');
                 $router->put('news/{news}', [AdminController::class, 'update'])->name('admin::update-news')->middleware('can:update news');
             });
