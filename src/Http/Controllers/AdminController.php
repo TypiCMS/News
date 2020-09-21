@@ -3,8 +3,11 @@
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\News\Exports\NewsExport;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
 
@@ -13,6 +16,13 @@ class AdminController extends BaseAdminController
     public function index(): View
     {
         return view('news::admin.index');
+    }
+
+    public function export(Request $request)
+    {
+        $filename = date('Y-m-d').' '.config('app.name').' news.xlsx';
+
+        return Excel::download(new NewsExport($request), $filename);
     }
 
     public function create(): View

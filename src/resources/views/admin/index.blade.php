@@ -12,6 +12,7 @@
     title="news"
     include="image"
     appends="thumb"
+    :exportable="true"
     :searchable="['title']"
     :sorting="['-date']">
 
