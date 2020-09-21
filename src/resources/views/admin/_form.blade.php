@@ -12,7 +12,7 @@
 <file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
 <files-field :init-files="{{ $model->files }}"></files-field>
 
-<div class="row">
+<div class="form-row">
     <div class="col-sm-6">
         {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker')->required() !!}
     </div>
