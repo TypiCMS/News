@@ -9,7 +9,7 @@
 {!! BootForm::hidden('id') !!}
 
 <file-manager></file-manager>
-<file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
+<file-field type="image" field="image_id" :init-file="{{ $model->image }}"></file-field>
 <files-field :init-files="{{ $model->files }}"></files-field>
 
 <div class="form-row">
