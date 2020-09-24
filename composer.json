@@ -22,7 +22,7 @@
                 "TypiCMS\\Modules\\News\\Providers\\ModuleServiceProvider"
             ],
             "aliases": {
-                "Debugbar": "TypiCMS\\Modules\\News\\Facades\\News"
+                "News": "TypiCMS\\Modules\\News\\Facades\\News"
             }
         }
     },
