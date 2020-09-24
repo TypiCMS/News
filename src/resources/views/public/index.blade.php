@@ -2,17 +2,25 @@
 
 @section('bodyClass', 'body-news body-news-index body-page body-page-'.$page->id)
 
-@section('content')
+@section('page')
 
-    <div class="rich-content">{!! $page->present()->body !!}</div>
+<div class="page-body">
 
-    @include('files::public._documents', ['model' => $page])
-    @include('files::public._images', ['model' => $page])
+    <div class="page-body-container">
 
-    @include('news::public._itemlist-json-ld', ['items' => $models])
+        <div class="rich-content">{!! $page->present()->body !!}</div>
 
-    @includeWhen($models->count() > 0, 'news::public._list', ['items' => $models])
+        @include('files::public._documents', ['model' => $page])
+        @include('files::public._images', ['model' => $page])
 
-    {!! $models->appends(Request::except('page'))->links() !!}
+        @include('news::public._itemlist-json-ld', ['items' => $models])
+
+        @includeWhen($models->count() > 0, 'news::public._list', ['items' => $models])
+
+        {!! $models->appends(Request::except('page'))->links() !!}
+
+    </div>
+
+</div>
 
 @endsection
