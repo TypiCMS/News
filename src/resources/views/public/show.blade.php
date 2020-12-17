@@ -26,7 +26,7 @@
         @include('core::public._social-links')
         @empty(!$model->image)
         <picture class="news-picture">
-            <img class="news-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
+            <img class="news-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
             @empty(!$model->image->description)
             <legend class="news-picture-legend">{{ $model->image->description }}</legend>
             @endempty
