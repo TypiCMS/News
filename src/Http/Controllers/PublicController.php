@@ -53,7 +53,8 @@ class PublicController extends BasePublicController
                 ->take(10)
                 ->get();
 
-            $feed->title = $page->title.' – '.TypiCMS::title();
+            $feed->title = TypiCMS::title();
+            $feed->subtitle = $page->title;
             $feed->description = $page->body;
             if (config('typicms.image')) {
                 $feed->logo = Storage::url('settings/'.config('typicms.image'));
@@ -68,7 +69,15 @@ class PublicController extends BasePublicController
             $feed->setTextLimit(100); // maximum length of description text
 
             foreach ($models as $model) {
-                $feed->add($model->title, null, url($model->uri()), $model->date, $model->summary, $model->present()->body);
+                $feed->addItem([
+                    'title' => $model->title,
+                    'author' => config('app.name'),
+                    'url' => url($model->uri()),
+                    'link' => url($model->uri()),
+                    'pubdate' => $model->date->format(DATE_RFC3339),
+                    'description' => $model->summary,
+                    'content' => $model->present()->body,
+                ]);
             }
         }
 
