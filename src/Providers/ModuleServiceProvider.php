@@ -20,18 +20,18 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['news' => ['linkable_to_page', 'has_feed']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'news');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'news');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_news_table.php.stub' => getMigrationFileName('create_news_table'),
+            __DIR__.'/../../database/migrations/create_news_table.php.stub' => getMigrationFileName('create_news_table'),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/news'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/news'),
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/../resources/scss' => resource_path('scss'),
+            __DIR__.'/../../resources/scss' => resource_path('scss'),
         ], 'resources');
 
         AliasLoader::getInstance()->alias('News', NewsFacade::class);
