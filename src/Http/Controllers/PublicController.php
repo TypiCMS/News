@@ -2,7 +2,6 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
@@ -37,7 +36,7 @@ class PublicController extends BasePublicController
             ->with(compact('model'));
     }
 
-    public function feed(): ?Response
+    public function feed()
     {
         $page = TypiCMS::getPageLinkedToModule('news');
         if (!$page) {
