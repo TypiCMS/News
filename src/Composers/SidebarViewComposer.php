@@ -19,8 +19,8 @@ class SidebarViewComposer
             $group->weight = 30;
             $group->addItem(__('News'), function (SidebarItem $item) {
                 $item->id = 'news';
-                $item->icon = config('typicms.news.sidebar.icon');
-                $item->weight = config('typicms.news.sidebar.weight');
+                $item->icon = config('typicms.modules.news.sidebar.icon');
+                $item->weight = config('typicms.modules.news.sidebar.weight');
                 $item->route('admin::index-news');
                 $item->append('admin::create-news');
             });
