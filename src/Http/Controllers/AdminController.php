@@ -43,13 +43,15 @@ class AdminController extends BaseAdminController
     {
         $news = News::create($request->validated());
 
-        return $this->redirect($request, $news);
+        return $this->redirect($request, $news)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(News $news, FormRequest $request): RedirectResponse
     {
         $news->update($request->validated());
 
-        return $this->redirect($request, $news);
+        return $this->redirect($request, $news)
+            ->withMessage(__('Item successfully updated.'));
     }
 }
