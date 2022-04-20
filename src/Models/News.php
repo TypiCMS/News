@@ -2,13 +2,14 @@
 
 namespace TypiCMS\Modules\News\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Traits\HasFiles;
+use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\News\Presenters\ModulePresenter;
 
 class News extends Base
@@ -24,6 +25,8 @@ class News extends Base
 
     protected $guarded = [];
 
+    protected $appends = ['thumb'];
+
     public $translatable = [
         'title',
         'slug',
@@ -32,9 +35,11 @@ class News extends Base
         'body',
     ];
 
-    public function getThumbAttribute(): string
+    protected function thumb(): Attribute
     {
-        return $this->present()->image(null, 54);
+        return new Attribute(
+            get: fn () => $this->present()->image(null, 54),
+        );
     }
 
     public function image(): BelongsTo
