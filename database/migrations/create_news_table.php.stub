@@ -12,10 +12,9 @@ class CreateNewsTable extends Migration
     public function up()
     {
         Schema::create('news', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
+            $table->id();
             $table->date('date');
-            $table->integer('image_id')->unsigned()->nullable();
+            $table->foreignId('image_id')->nullable();
             $table->json('status');
             $table->json('title');
             $table->json('slug');
