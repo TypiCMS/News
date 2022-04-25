@@ -6,6 +6,7 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Core\Http\Controllers\FeedController;
 use TypiCMS\Modules\News\Http\Controllers\AdminController;
 use TypiCMS\Modules\News\Http\Controllers\ApiController;
 use TypiCMS\Modules\News\Http\Controllers\PublicController;
@@ -23,7 +24,7 @@ class RouteServiceProvider extends ServiceProvider
                 if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
                     Route::middleware($middleware)->prefix($uri)->name($lang.'::')->group(function (Router $router) {
                         $router->get('/', [PublicController::class, 'index'])->name('index-news');
-                        $router->get('feed.xml', [PublicController::class, 'feed'])->name('news-feed');
+                        $router->get('{module}-feed.xml', FeedController::class)->name('news-feed');
                         $router->get('{slug}', [PublicController::class, 'show'])->name('news');
                     });
                 }
