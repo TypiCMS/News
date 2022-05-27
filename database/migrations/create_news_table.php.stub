@@ -15,7 +15,7 @@ class CreateNewsTable extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->foreignId('image_id')->nullable();
+            $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
             $table->json('status')->default(new Expression('(JSON_OBJECT())'));
             $table->json('title')->default(new Expression('(JSON_OBJECT())'));
             $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
