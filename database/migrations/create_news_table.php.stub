@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -15,11 +16,11 @@ class CreateNewsTable extends Migration
             $table->id();
             $table->date('date');
             $table->foreignId('image_id')->nullable();
-            $table->json('status');
-            $table->json('title');
-            $table->json('slug');
-            $table->json('summary');
-            $table->json('body');
+            $table->json('status')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('title')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('summary')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('body')->default(new Expression('(JSON_OBJECT())'));
             $table->timestamps();
         });
     }
