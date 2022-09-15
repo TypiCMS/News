@@ -42,7 +42,7 @@ class News extends Base implements Feedable
         return FeedItem::create()
             ->id($this->id)
             ->title($this->title)
-            ->summary($this->summary)
+            ->summary($this->summary ?? '')
             ->updated($this->updated_at)
             ->link($this->uri())
             ->authorName($this->author ?? config('app.name'));
