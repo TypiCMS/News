@@ -21,7 +21,7 @@ class News extends Base implements Feedable
     use Historable;
     use PresentableTrait;
 
-    protected $presenter = ModulePresenter::class;
+    protected string $presenter = ModulePresenter::class;
 
     protected $casts = [
         'date' => 'datetime:Y-m-d',
@@ -31,7 +31,7 @@ class News extends Base implements Feedable
 
     protected $appends = ['thumb'];
 
-    public $translatable = [
+    public array $translatable = [
         'title',
         'slug',
         'status',
