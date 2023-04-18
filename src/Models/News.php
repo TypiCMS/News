@@ -52,7 +52,7 @@ class News extends Base implements Feedable
 
     protected function thumb(): Attribute
     {
-        return new Attribute(
+        return Attribute::make(
             get: fn () => $this->present()->image(null, 54),
         );
     }
