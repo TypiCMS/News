@@ -14,8 +14,6 @@
 
     @include('core::admin._form-errors')
 
-    {!! BootForm::hidden('id') !!}
-
     <file-manager></file-manager>
     <file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
     <files-field :init-files="{{ $model->files }}"></files-field>
