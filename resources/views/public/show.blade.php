@@ -25,12 +25,12 @@
             @endempty
             @include('core::public._share-links')
             @empty(!$model->image)
-                <picture class="news-picture">
+                <figure class="news-picture">
                     <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
                     @empty(!$model->image->description)
-                        <legend class="news-picture-legend">{{ $model->image->description }}</legend>
+                    <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
-                </picture>
+                </figure>
             @endempty
             @empty(!$model->body)
                 <div class="rich-content">{!! $model->present()->body !!}</div>
