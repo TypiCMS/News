@@ -17,6 +17,8 @@ class ModuleServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__ . '/../config/news.php', 'typicms.modules.news');
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/news.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'news');
 
         $this->publishes([__DIR__ . '/../../database/migrations/create_news_table.php.stub' => getMigrationFileName('create_news_table')], 'typicms-migrations');
@@ -41,8 +43,6 @@ class ModuleServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app['config']->push('typicms.feeds', ['module' => 'news']);
-
-        $this->app->register(RouteServiceProvider::class);
 
         $this->app->bind('News', News::class);
     }
