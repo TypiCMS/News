@@ -7,7 +7,6 @@
 @section('bodyClass', 'body-news body-news-'.$model->id.' body-page body-page-'.$page->id)
 
 @section('content')
-
     <article class="news">
         <header class="news-header">
             <div class="news-header-container">
@@ -20,24 +19,32 @@
         </header>
         <div class="news-body">
             @include('news::public._json-ld', ['news' => $model])
-            @empty(!$model->summary)
+            @empty(! $model->summary)
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
             @endempty
+
             @include('core::public._share-links')
-            @empty(!$model->image)
+            @empty(! $model->image)
                 <figure class="news-picture">
-                    <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
-                    @empty(!$model->image->description)
-                    <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
+                    <img
+                        class="news-picture-image"
+                        src="{{ $model->present()->image(2000) }}"
+                        width="{{ $model->image->width }}"
+                        height="{{ $model->image->height }}"
+                        alt=""
+                    />
+                    @empty(! $model->image->description)
+                        <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
                 </figure>
             @endempty
-            @empty(!$model->body)
+
+            @empty(! $model->body)
                 <div class="rich-content">{!! $model->present()->body !!}</div>
             @endempty
+
             @include('files::public._document-list')
             @include('files::public._image-list')
         </div>
     </article>
-
 @endsection

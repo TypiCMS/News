@@ -7,11 +7,11 @@
     @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('News')])
     @include('core::admin._title', ['default' => __('New news')])
     @component('core::admin._buttons-form', ['model' => $model])
+        
     @endcomponent
 </div>
 
 <div class="content">
-
     @include('core::admin._form-errors')
 
     <file-manager></file-manager>
@@ -20,7 +20,7 @@
 
     <div class="row gx-3">
         <div class="col-sm-6">
-            {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker')->required() !!}
+            {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: $model->present()->dateOrNow('date'))->addClass('datepicker')->required() !!}
         </div>
     </div>
 
