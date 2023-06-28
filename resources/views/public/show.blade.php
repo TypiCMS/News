@@ -26,13 +26,7 @@
             @include('core::public._share-links')
             @empty(! $model->image)
                 <figure class="news-picture">
-                    <img
-                        class="news-picture-image"
-                        src="{{ $model->present()->image(2000) }}"
-                        width="{{ $model->image->width }}"
-                        height="{{ $model->image->height }}"
-                        alt=""
-                    />
+                    <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @empty(! $model->image->description)
                         <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
