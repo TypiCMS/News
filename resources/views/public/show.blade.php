@@ -1,10 +1,10 @@
 @extends('core::public.master')
 
-@section('title', $model->title.' – '.__('News').' – '.$websiteTitle)
+@section('title', $model->title . ' – ' . __('News') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('ogImage', $model->present()->image(1200, 630))
-@section('bodyClass', 'body-news body-news-'.$model->id.' body-page body-page-'.$page->id)
+@section('bodyClass', 'body-news body-news-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('content')
     <article class="news">
@@ -19,21 +19,21 @@
         </header>
         <div class="news-body">
             @include('news::public._json-ld', ['news' => $model])
-            @empty(! $model->summary)
+            @empty(!$model->summary)
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
             @endempty
 
             @include('core::public._share-links')
-            @empty(! $model->image)
+            @empty(!$model->image)
                 <figure class="news-picture">
                     <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
-                    @empty(! $model->image->description)
+                    @empty(!$model->image->description)
                         <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
                 </figure>
             @endempty
 
-            @empty(! $model->body)
+            @empty(!$model->body)
                 <div class="rich-content">{!! $model->present()->body !!}</div>
             @endempty
 
