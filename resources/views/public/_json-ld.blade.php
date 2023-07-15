@@ -19,7 +19,7 @@
             "name": "{{ config('app.name') }}",
             "logo": {
                 "@type": "ImageObject",
-                "url": "{{ Storage::url('settings/' . config('typicms.image')) }}"
+                "url": "{{ url(config('typicms.logo')) }}"
             }
         },
         "description": "{{ preg_replace("/\r|\n/", ' ', $news->summary) }}"
