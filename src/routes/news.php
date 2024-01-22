@@ -43,8 +43,4 @@ Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $r
     $router->get('news', [ApiController::class, 'index'])->middleware('can:read news');
     $router->patch('news/{news}', [ApiController::class, 'updatePartial'])->middleware('can:update news');
     $router->delete('news/{news}', [ApiController::class, 'destroy'])->middleware('can:delete news');
-
-    $router->get('news/{news}/files', [ApiController::class, 'files'])->middleware('can:update news');
-    $router->post('news/{news}/files', [ApiController::class, 'attachFiles'])->middleware('can:update news');
-    $router->delete('news/{news}/files/{file}', [ApiController::class, 'detachFile'])->middleware('can:update news');
 });
