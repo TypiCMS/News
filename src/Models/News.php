@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laracasts\Presenter\PresentableTrait;
@@ -10,10 +11,12 @@ use Spatie\Feed\FeedItem;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Traits\HasFiles;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\News\Presenters\ModulePresenter;
 
+#[ObservedBy(SlugObserver::class)]
 class News extends Base implements Feedable
 {
     use HasFiles;

@@ -6,7 +6,6 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\News\Composers\SidebarViewComposer;
 use TypiCMS\Modules\News\Facades\News as NewsFacade;
 use TypiCMS\Modules\News\Models\News;
@@ -26,9 +25,6 @@ class ModuleServiceProvider extends ServiceProvider
         $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('News', NewsFacade::class);
-
-        // Observers
-        News::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
