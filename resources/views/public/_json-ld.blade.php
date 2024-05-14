@@ -19,7 +19,7 @@
             "name": "{{ config('app.name') }}",
             "logo": {
                 "@type": "ImageObject",
-                "url": "{{ url(config('typicms.logo')) }}"
+                "url": "{{ Vite::asset(config('typicms.logo')) }}"
             }
         },
         "description": "{{ preg_replace("/\r|\n/", ' ', $news->summary) }}"
