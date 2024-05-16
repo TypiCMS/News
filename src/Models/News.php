@@ -61,4 +61,9 @@ class News extends Base implements Feedable
     {
         return $this->belongsTo(File::class, 'image_id');
     }
+
+    public function ogImage(): BelongsTo
+    {
+        return $this->belongsTo(File::class, 'og_image_id');
+    }
 }

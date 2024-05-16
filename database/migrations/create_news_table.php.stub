@@ -15,6 +15,7 @@ return new class() extends Migration {
             $table->id();
             $table->date('date');
             $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
+            $table->foreignId('og_image_id')->nullable()->constrained('files')->nullOnDelete();
             $table->json('status')->default(new Expression('(JSON_OBJECT())'));
             $table->json('title')->default(new Expression('(JSON_OBJECT())'));
             $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
