@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\News\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\News\Composers\SidebarViewComposer;
 use TypiCMS\Modules\News\Facades\News as NewsFacade;
@@ -36,7 +35,7 @@ class ModuleServiceProvider extends ServiceProvider
          * Add the page in the view.
          */
         View::composer('news::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('news');
+            $view->page = getPageLinkedToModule('news');
         });
     }
 
