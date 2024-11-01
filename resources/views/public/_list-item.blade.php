@@ -4,9 +4,9 @@
         <div class="news-list-item-info">
             <h2 class="news-list-item-title">{{ $news->title }}</h2>
             <div class="news-list-item-date">{{ $news->present()->dateLocalized }}</div>
-            @empty(!$news->summary)
+            @if(!empty($news->summary))
                 <div class="news-list-item-summary">{{ $news->summary }}</div>
-            @endempty
+            @endif
         </div>
     </a>
 </li>
