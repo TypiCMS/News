@@ -13,8 +13,8 @@ use TypiCMS\Modules\News\Http\Controllers\PublicController;
 if ($page = getPageLinkedToModule('news')) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
-        if ($page->isPublished($lang) && $uri = $page->uri($lang)) {
-            Route::middleware($middleware)->prefix($uri)->name($lang . '::')->group(function (Router $router) {
+        if ($page->isPublished($lang) && $path = $page->path($lang)) {
+            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router) {
                 $router->get('/', [PublicController::class, 'index'])->name('index-news');
                 $router->get('{module}-feed.xml', FeedController::class)->name('news-feed');
                 $router->get('{slug}', [PublicController::class, 'show'])->name('news');

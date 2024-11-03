@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\News\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -39,6 +40,15 @@ class News extends Base implements Feedable
         'body',
     ];
 
+    public function url($locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $route = $locale . '::news';
+        $slug = $this->translate('slug', $locale) ?: null;
+
+        return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
@@ -46,7 +56,7 @@ class News extends Base implements Feedable
             ->title($this->title)
             ->summary($this->summary ?? '')
             ->updated($this->updated_at)
-            ->link($this->uri())
+            ->link($this->url())
             ->authorName($this->author ?? config('app.name'));
     }
 

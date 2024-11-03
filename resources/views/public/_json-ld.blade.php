@@ -4,7 +4,7 @@
         "@type": "NewsArticle",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "{{ url($news->uri()) }}"
+            "@id": "{{ $news->url() }}"
         },
         "headline": "{{ $news->title }}",
         "image": ["{{ $news->present()->image() }}"],
