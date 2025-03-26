@@ -4,11 +4,11 @@
 
 @section('content')
     <item-list url-base="/api/news" fields="id,image_id,date,status,title" table="news" title="news" include="image" :exportable="true" :searchable="['title']" :sorting="['-date']">
-        <template slot="add-button" v-if="$can('create news')">
+        <template #add-button v-if="$can('create news')">
             @include('core::admin._button-create', ['module' => 'news'])
         </template>
 
-        <template slot="columns" slot-scope="{ sortArray }">
+        <template #columns="{ sortArray }">
             <item-list-column-header name="checkbox" v-if="$can('update news')||$can('delete news')"></item-list-column-header>
             <item-list-column-header name="edit" v-if="$can('update news')"></item-list-column-header>
             <item-list-column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></item-list-column-header>
@@ -17,7 +17,7 @@
             <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
         </template>
 
-        <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
+        <template #table-row="{ model, checkedModels, loading, toggleStatus }">
             <td class="checkbox" v-if="$can('update news')||$can('delete news')">
                 <item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox>
             </td>
@@ -28,7 +28,7 @@
                 <item-list-status-button :model="model"></item-list-status-button>
             </td>
             <td><img :src="model.thumb" alt="" height="27" /></td>
-            <td>@{{ model.date | date }}</td>
+            <td>@{{ formatDate(model.date) }}</td>
             <td v-html="model.title_translated"></td>
         </template>
     </item-list>
