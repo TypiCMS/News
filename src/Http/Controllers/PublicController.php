@@ -10,7 +10,8 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $models = News::published()
+        $models = News::query()
+            ->published()
             ->order()
             ->with('image')
             ->paginate(config('typicms.modules.news.per_page'));
@@ -21,7 +22,8 @@ class PublicController extends BasePublicController
 
     public function show($slug): View
     {
-        $model = News::published()
+        $model = News::query()
+            ->published()
             ->with([
                 'image',
                 'images',
