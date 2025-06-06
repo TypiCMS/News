@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\News\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Feed\Feedable;
@@ -15,6 +16,12 @@ use TypiCMS\Modules\Core\Traits\HasFiles;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\News\Presenters\ModulePresenter;
 
+/**
+ * @property-read int $id
+ * @property-read string $thumb
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
+ */
 class News extends Base implements Feedable
 {
     use HasFiles;
