@@ -14,8 +14,8 @@ class ApiController extends BaseApiController
 {
     public function index(Request $request): LengthAwarePaginator
     {
-        $data = QueryBuilder::for(News::class)
-            ->selectFields()
+        $query = News::query()->selectFields();
+        $data = QueryBuilder::for($query)
             ->allowedSorts(['status_translated', 'date', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
