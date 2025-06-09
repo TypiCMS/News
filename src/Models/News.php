@@ -23,13 +23,13 @@ use TypiCMS\Modules\News\Presenters\ModulePresenter;
  * @property Carbon $date
  * @property int|null $og_image_id
  * @property int|null $image_id
- * @property array<array-key, mixed> $status
- * @property array<array-key, mixed> $title
+ * @property string $status
+ * @property string $title
  * @property string|null $plans
  * @property string|null $team
- * @property array<array-key, mixed> $slug
- * @property array<array-key, mixed> $summary
- * @property array<array-key, mixed> $body
+ * @property string $slug
+ * @property string $summary
+ * @property string $body
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection<int, File> $audios
