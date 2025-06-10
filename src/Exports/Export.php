@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Exports;
 
+use Illuminate\Database\Eloquent\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -16,7 +17,7 @@ use TypiCMS\Modules\News\Models\News;
 
 class Export implements FromCollection, ShouldAutoSize, WithColumnFormatting, WithHeadings, WithMapping
 {
-    protected $collection;
+    protected Collection $collection;
 
     public function collection()
     {

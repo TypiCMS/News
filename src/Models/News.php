@@ -100,6 +100,9 @@ class News extends Base implements Feedable
             ->authorName($this->author ?? config('app.name'));
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function thumb(): Attribute
     {
         return Attribute::make(
