@@ -58,9 +58,7 @@ class News extends Base implements Feedable
 
     protected string $presenter = ModulePresenter::class;
 
-    /**
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     protected function casts(): array
     {
         return [
@@ -72,6 +70,7 @@ class News extends Base implements Feedable
 
     protected $appends = ['thumb'];
 
+    /** @var array<string> */
     public array $translatable = [
         'title',
         'slug',
@@ -80,7 +79,7 @@ class News extends Base implements Feedable
         'body',
     ];
 
-    public function url($locale = null): string
+    public function url(?string $locale = null): string
     {
         $locale = $locale ?: app()->getLocale();
         $route = $locale . '::news';
@@ -100,9 +99,7 @@ class News extends Base implements Feedable
             ->authorName($this->author ?? config('app.name'));
     }
 
-    /**
-     * @return Attribute<string, null>
-     */
+    /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
         return Attribute::make(

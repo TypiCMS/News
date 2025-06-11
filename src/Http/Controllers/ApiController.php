@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\News\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -26,7 +27,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(News $news, Request $request)
+    protected function updatePartial(News $news, Request $request): void
     {
         foreach ($request->only('status') as $key => $content) {
             if ($news->isTranslatableAttribute($key)) {
@@ -41,8 +42,10 @@ class ApiController extends BaseApiController
         $news->save();
     }
 
-    public function destroy(News $news)
+    public function destroy(News $news): JsonResponse
     {
         $news->delete();
+
+        return response()->json(status: 204);
     }
 }

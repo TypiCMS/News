@@ -20,7 +20,7 @@ class PublicController extends BasePublicController
             ->with(compact('models'));
     }
 
-    public function show($slug): View
+    public function show(string $slug): View
     {
         $model = News::query()
             ->published()
