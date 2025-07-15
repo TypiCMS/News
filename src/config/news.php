@@ -8,7 +8,7 @@ return [
         'date' => 'desc',
     ],
     'sidebar' => [
-        'icon' => '<i class="bi bi-newspaper"></i>',
+        'icon' => '<i class="icon-newspaper"></i>',
         'weight' => 20,
     ],
     'permissions' => [
