@@ -25,5 +25,5 @@
         {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
     </div>
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-    <x-core::tiptap-editors :model="$model" name="body" />
+    <x-core::tiptap-editors :model="$model" name="body" :label="__('Body')" />
 </div>
