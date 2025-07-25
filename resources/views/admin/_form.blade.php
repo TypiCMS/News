@@ -25,7 +25,5 @@
         {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
     </div>
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-    @foreach(locales() as $locale)
-        <tiptap-editor name="body[{{ $locale }}]" locale="{{ $locale }}" init-content="{{ $model->getTranslation('body', $locale) }}"></tiptap-editor>
-    @endforeach
+    <x-core::tiptap-editors :model="$model" name="body" />
 </div>
