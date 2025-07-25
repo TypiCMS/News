@@ -79,6 +79,11 @@ class News extends Base implements Feedable
         'body',
     ];
 
+    /** @var array<string> */
+    public array $tipTapContent = [
+        'body',
+    ];
+
     public function url(?string $locale = null): string
     {
         $locale = $locale ?: app()->getLocale();
