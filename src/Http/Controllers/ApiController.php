@@ -43,6 +43,13 @@ class ApiController extends BaseApiController
         $news->save();
     }
 
+    public function duplicate(News $news)
+    {
+        $newNews = $news->replicate();
+        $newNews->setTranslations('status', []);
+        $newNews->save();
+    }
+
     public function destroy(News $news): JsonResponse
     {
         $news->delete();

@@ -41,5 +41,6 @@ Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Ro
 Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
     $router->get('news', [ApiController::class, 'index'])->middleware('can:read news');
     $router->patch('news/{news}', [ApiController::class, 'updatePartial'])->middleware('can:update news');
+    $router->post('news/{news}/duplicate', [ApiController::class, 'duplicate'])->middleware('can:create news');
     $router->delete('news/{news}', [ApiController::class, 'destroy'])->middleware('can:delete news');
 });
