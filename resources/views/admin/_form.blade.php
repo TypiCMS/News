@@ -1,12 +1,11 @@
 <div class="header">
-    @include('core::admin._button-back', ['url' => $model->indexUrl(), 'title' => __('News')])
-    @include('core::admin._title', ['default' => __('New news')])
-    @component('core::admin._buttons-form', ['model' => $model])
-    @endcomponent
+    <x-core::back-button :url="$model->indexUrl()" :title="__('News')" />
+    <x-core::title :$model :default="__('New news')" />
+    <x-core::form-buttons :$model :locales="locales()" />
 </div>
 
 <div class="content">
-    @include('core::admin._form-errors')
+    <x-core::form-errors />
 
     <file-manager></file-manager>
     <file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
@@ -19,7 +18,7 @@
         </div>
     </div>
 
-    @include('core::form._title-and-slug')
+    <x-core::title-and-slug-fields :locales="locales()" />
     <div class="mb-3">
         {!! TranslatableBootForm::hidden('status')->value(0) !!}
         {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
