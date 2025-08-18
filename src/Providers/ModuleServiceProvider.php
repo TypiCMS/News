@@ -43,8 +43,6 @@ class ModuleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app['config']->push('typicms.feeds', ['module' => 'news']);
-
         $this->app->bind('News', News::class);
     }
 }
