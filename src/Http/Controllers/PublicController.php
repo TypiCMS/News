@@ -17,7 +17,7 @@ class PublicController extends BasePublicController
             ->paginate(config('typicms.modules.news.per_page'));
 
         return view('news::public.index')
-            ->with(compact('models'));
+            ->with(['models' => $models]);
     }
 
     public function show(string $slug): View
@@ -33,6 +33,6 @@ class PublicController extends BasePublicController
             ->firstOrFail();
 
         return view('news::public.show')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 }

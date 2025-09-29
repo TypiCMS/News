@@ -36,7 +36,7 @@ class ModuleServiceProvider extends ServiceProvider
         /*
          * Add the page in the view.
          */
-        View::composer('news::public.*', function ($view) {
+        View::composer('news::public.*', function ($view): void {
             $view->page = getPageLinkedToModule('news');
         });
     }

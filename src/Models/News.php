@@ -86,7 +86,7 @@ class News extends Base implements Feedable
 
     public function url(?string $locale = null): string
     {
-        $locale = $locale ?: app()->getLocale();
+        $locale ??= app()->getLocale();
         $route = $locale . '::news';
         $slug = $this->translate('slug', $locale) ?: null;
 
