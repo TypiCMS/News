@@ -19,21 +19,21 @@
         </header>
         <div class="news-body">
             @include('news::public._json-ld', ['news' => $model])
-            @if(!empty($model->summary))
+            @if (!empty($model->summary))
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
             @endif
 
             @include('core::public._share-links')
-            @if(!empty($model->image))
+            @if (!empty($model->image))
                 <figure class="news-picture">
                     <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
-                    @if(!empty($model->image->description))
+                    @if (!empty($model->image->description))
                         <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
                 </figure>
             @endif
 
-            @if(!empty($model->body))
+            @if (!empty($model->body))
                 <div class="rich-content">{!! $model->present()->body !!}</div>
             @endif
 
