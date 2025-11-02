@@ -1,6 +1,6 @@
 <script type="application/ld+json">
     {
-        "@context": "http://schema.org",
+        "@@context": "http://schema.org",
         "@type": "NewsArticle",
         "mainEntityOfPage": {
             "@type": "WebPage",
