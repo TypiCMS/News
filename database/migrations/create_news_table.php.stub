@@ -11,7 +11,7 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('news', function (Blueprint $table) {
+        Schema::create('news', function (Blueprint $table): void {
             $table->id();
             $table->date('date');
             $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
