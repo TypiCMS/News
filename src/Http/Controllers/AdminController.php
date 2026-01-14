@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -12,7 +14,7 @@ use TypiCMS\Modules\News\Exports\Export;
 use TypiCMS\Modules\News\Http\Requests\FormRequest;
 use TypiCMS\Modules\News\Models\News;
 
-class AdminController extends BaseAdminController
+final class AdminController extends BaseAdminController
 {
     public function index(): View
     {
@@ -30,29 +32,25 @@ class AdminController extends BaseAdminController
     {
         $model = new News();
 
-        return view('news::admin.create')
-            ->with(['model' => $model]);
+        return view('news::admin.create', ['model' => $model]);
     }
 
     public function edit(News $news): View
     {
-        return view('news::admin.edit')
-            ->with(['model' => $news]);
+        return view('news::admin.edit', ['model' => $news]);
     }
 
     public function store(FormRequest $request): RedirectResponse
     {
         $news = News::query()->create($request->validated());
 
-        return $this->redirect($request, $news)
-            ->withMessage(__('Item successfully created.'));
+        return $this->redirect($request, $news)->withMessage(__('Item successfully created.'));
     }
 
     public function update(News $news, FormRequest $request): RedirectResponse
     {
         $news->update($request->validated());
 
-        return $this->redirect($request, $news)
-            ->withMessage(__('Item successfully updated.'));
+        return $this->redirect($request, $news)->withMessage(__('Item successfully updated.'));
     }
 }

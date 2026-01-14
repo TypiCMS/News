@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\News\Http\Controllers;
 
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\News\Models\News;
 
-class PublicController extends BasePublicController
+final class PublicController extends BasePublicController
 {
     public function index(): View
     {
@@ -16,8 +18,7 @@ class PublicController extends BasePublicController
             ->with('image')
             ->paginate(config('typicms.modules.news.per_page'));
 
-        return view('news::public.index')
-            ->with(['models' => $models]);
+        return view('news::public.index', ['models' => $models]);
     }
 
     public function show(string $slug): View
@@ -32,7 +33,6 @@ class PublicController extends BasePublicController
             ->whereSlugIs($slug)
             ->firstOrFail();
 
-        return view('news::public.show')
-            ->with(['model' => $model]);
+        return view('news::public.show', ['model' => $model]);
     }
 }
