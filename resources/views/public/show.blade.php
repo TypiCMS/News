@@ -23,7 +23,7 @@
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
             @endif
 
-            @include('core::public._share-links')
+            <x-core::share-links :$model />
             @if ($model->image)
                 <figure class="news-picture">
                     <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
