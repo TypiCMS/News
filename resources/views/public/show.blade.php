@@ -11,7 +11,7 @@
         <header class="news-header">
             <div class="news-header-container">
                 <div class="news-header-navigator">
-                    @include('core::public._items-navigator', ['module' => 'News', 'model' => $model])
+                    <x-core::items-navigator module="News" :$model :$page />
                 </div>
                 <h1 class="news-title">{{ $model->title }}</h1>
                 <div class="news-date">{{ $model->present()->dateLocalized }}</div>
