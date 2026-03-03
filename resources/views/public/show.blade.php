@@ -18,7 +18,31 @@
             </div>
         </header>
         <div class="news-body">
-            @include('news::public._json-ld', ['news' => $model])
+            <x-core::json-ld :schema="[
+                '@context' => 'https://schema.org',
+                '@type' => 'NewsArticle',
+                'mainEntityOfPage' => [
+                    '@type' => 'WebPage',
+                    '@id' => $model->url(),
+                ],
+                'headline' => $model->title,
+                'image' => [$model->present()->image()],
+                'datePublished' => $model->date->toIso8601String(),
+                'dateModified' => $model->updated_at->toIso8601String(),
+                'author' => [
+                    '@type' => 'Organization',
+                    'name' => config('app.name'),
+                ],
+                'publisher' => [
+                    '@type' => 'Organization',
+                    'name' => config('app.name'),
+                    'logo' => [
+                        '@type' => 'ImageObject',
+                        'url' => Vite::asset(config('typicms.logo')),
+                    ],
+                ],
+                'description' => preg_replace('/\r|\n/', ' ', $model->summary),
+            ]" />
             @if ($model->summary)
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
             @endif
