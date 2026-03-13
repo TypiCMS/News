@@ -3,7 +3,7 @@
 @section('title', $model->title . ' – ' . __('News') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('ogImage', $model->present()->ogImage())
+@section('ogImage', $model->ogImageUrl())
 @section('bodyClass', 'body-news body-news-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('content')
@@ -14,7 +14,7 @@
                     <x-core::items-navigator :$model :$page />
                 </div>
                 <h1 class="news-title">{{ $model->title }}</h1>
-                <div class="news-date">{{ $model->present()->dateLocalized }}</div>
+                <div class="news-date">{{ $model->dateLocalized() }}</div>
             </div>
         </header>
         <div class="news-body">
@@ -26,7 +26,7 @@
                     '@id' => $model->url(),
                 ],
                 'headline' => $model->title,
-                'image' => [$model->present()->image()],
+                'image' => [$model->imageUrl()],
                 'datePublished' => $model->date->toIso8601String(),
                 'dateModified' => $model->updated_at->toIso8601String(),
                 'author' => [
@@ -50,7 +50,7 @@
             <x-core::share-links :$model />
             @if ($model->image)
                 <figure class="news-picture">
-                    <img class="news-picture-image" src="{{ $model->present()->image(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    <img class="news-picture-image" src="{{ $model->imageUrl(2000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @if ($model->image->description)
                         <figcaption class="news-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
@@ -58,7 +58,7 @@
             @endif
 
             @if ($model->body)
-                <div class="rich-content">{!! $model->present()->body !!}</div>
+                <div class="rich-content">{!! $model->formattedBody() !!}</div>
             @endif
 
             @include('files::public._document-list')

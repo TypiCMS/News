@@ -7,7 +7,7 @@
             "@id": "{{ $news->url() }}"
         },
         "headline": "{{ $news->title }}",
-        "image": ["{{ $news->present()->image() }}"],
+        "image": ["{{ $news->imageUrl() }}"],
         "datePublished": "{{ $news->date }}",
         "dateModified": "{{ $news->updated_at }}",
         "author": {
