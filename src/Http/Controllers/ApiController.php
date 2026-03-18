@@ -21,11 +21,11 @@ final class ApiController extends BaseApiController
         $query = News::query()->selectFields();
 
         return QueryBuilder::for($query)
-            ->allowedSorts(['status_translated', 'date', 'title_translated'])
-            ->allowedFilters([
+            ->allowedSorts('status_translated', 'date', 'title_translated')
+            ->allowedFilters(
                 AllowedFilter::custom('title', new FilterOr()),
-            ])
-            ->allowedIncludes(['image'])
+            )
+            ->allowedIncludes('image')
             ->paginate($request->integer('per_page'));
     }
 
