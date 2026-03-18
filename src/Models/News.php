@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Uri;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
 use TypiCMS\Modules\Core\Models\File;
@@ -97,13 +98,28 @@ class News extends Model implements Feedable
         'body',
     ];
 
-    public function url(?string $locale = null): string
+    public function url(?string $locale = null): ?string
     {
         $locale ??= app()->getLocale();
-        $route = $locale . '::news';
-        $slug = $this->translate('slug', $locale) ?: null;
+        $route = "{$locale}::news";
+        $slug = $this->translate('slug', $locale);
 
-        return Route::has($route) && $slug ? url(route($route, $slug)) : url('/');
+        if (Route::has($route) && $slug) {
+            return route($route, $slug);
+        }
+
+        return null;
+    }
+
+    public function previewUrl(?string $locale = null): ?string
+    {
+        $url = $this->url($locale);
+
+        if (!$url) {
+            return null;
+        }
+
+        return (string) Uri::of($url)->withQuery(['preview' => 'true']);
     }
 
     public function toFeedItem(): FeedItem
@@ -113,7 +129,7 @@ class News extends Model implements Feedable
             ->title($this->title)
             ->summary($this->summary ?? '')
             ->updated($this->updated_at)
-            ->link($this->url())
+            ->link($this->url() ?? '')
             ->authorName($this->author ?? config('app.name'));
     }
 
