@@ -1,9 +1,9 @@
 <li class="news-list-item">
     <div class="news-list-item-wrapper">
-        <img class="news-list-item-image" src="{{ $news->imageUrl(800, 600) }}" width="400" height="300" alt="{{ $news->image?->alt_attribute }}" />
+        <img class="news-list-item-image" src="{{ imageOrDefault($news->image, 800, 600) }}" width="400" height="300" alt="{{ $news->image?->alt_attribute }}" />
         <div class="news-list-item-info">
             <h2 class="news-list-item-title">{{ $news->title }}</h2>
-            <div class="news-list-item-date">{{ $news->dateLocalized() }}</div>
+            <div class="news-list-item-date"><x-core::date-localized :date="$news->date" /></div>
             @if ($news->summary)
                 <div class="news-list-item-summary">{{ $news->summary }}</div>
             @endif

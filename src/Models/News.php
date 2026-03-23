@@ -19,10 +19,8 @@ use TypiCMS\Modules\Core\Traits\HasAdminUrls;
 use TypiCMS\Modules\Core\Traits\HasBodyPresenter;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
 use TypiCMS\Modules\Core\Traits\HasContentPresenter;
-use TypiCMS\Modules\Core\Traits\HasDatePresenter;
 use TypiCMS\Modules\Core\Traits\HasFiles;
-use TypiCMS\Modules\Core\Traits\HasImagePresenter;
-use TypiCMS\Modules\Core\Traits\HasOgImagePresenter;
+use TypiCMS\Modules\Core\Traits\HasOgImage;
 use TypiCMS\Modules\Core\Traits\HasSelectableFields;
 use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\Historable;
@@ -67,10 +65,8 @@ class News extends Model implements Feedable
     use HasBodyPresenter;
     use HasConfigurableOrder;
     use HasContentPresenter;
-    use HasDatePresenter;
     use HasFiles;
-    use HasImagePresenter;
-    use HasOgImagePresenter;
+    use HasOgImage;
     use HasSelectableFields;
     use HasSlugScope;
     use HasTranslations;
@@ -142,7 +138,7 @@ class News extends Model implements Feedable
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => $this->imageUrl(null, 54));
+        return Attribute::make(get: fn () => imageOrDefault($this->image, null, 54));
     }
 
     /** @return BelongsTo<File, $this> */

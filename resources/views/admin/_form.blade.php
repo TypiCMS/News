@@ -11,7 +11,7 @@
         <div class="col-lg-8">
             <div class="row gx-3">
                 <div class="col-sm-6">
-                    {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: $model->dateOrNow('date'))->addClass('datepicker')->required() !!}
+                    {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: ($model->date ?: now())->format('Y-m-d'))->addClass('datepicker')->required() !!}
                 </div>
             </div>
 
