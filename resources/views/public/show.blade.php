@@ -41,7 +41,7 @@
                         'url' => Vite::asset(config('typicms.logo')),
                     ],
                 ],
-                'description' => preg_replace('/\r|\n/', ' ', $model->summary),
+                'description' => $model->summary ? $model->summary : Str::limit(strip_tags($model->body), 200),
             ]" />
             @if ($model->summary)
                 <p class="news-summary">{!! nl2br($model->summary) !!}</p>
