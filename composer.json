@@ -1,6 +1,6 @@
 {
     "name": "typicms/news",
-    "description": "",
+    "description": "Provides a structured way to manage and display multilingual news content in TypiCMS applications.",
     "license": "MIT",
     "authors": [
         {
