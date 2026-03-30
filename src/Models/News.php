@@ -123,7 +123,7 @@ class News extends Model implements Feedable
     {
         $url = $this->url($locale);
 
-        if (!$url) {
+        if (! $url) {
             return null;
         }
 

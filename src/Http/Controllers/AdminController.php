@@ -23,14 +23,14 @@ final class AdminController extends BaseAdminController
 
     public function export(Request $request): BinaryFileResponse
     {
-        $filename = date('Y-m-d') . ' ' . config('app.name') . ' news.xlsx';
+        $filename = date('Y-m-d').' '.config('app.name').' news.xlsx';
 
-        return Excel::download(new Export(), $filename);
+        return Excel::download(new Export, $filename);
     }
 
     public function create(): View
     {
-        $model = new News();
+        $model = new News;
 
         return view('news::admin.create', ['model' => $model]);
     }

@@ -19,7 +19,7 @@ if (($page = getPageLinkedToModule('news')) instanceof Page) {
         if ($page->isPublished($lang) && ($path = $page->path($lang))) {
             Route::middleware($middleware)
                 ->prefix($path)
-                ->name($lang . '::')
+                ->name($lang.'::')
                 ->group(function (Router $router): void {
                     $router->get('/', [PublicController::class, 'index'])->name('index-news');
                     $router->get('{module}-feed.xml', FeedController::class)->name('news-feed');
